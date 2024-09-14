@@ -2,20 +2,15 @@ from flask import Flask, request
 # NFL Import
 from espn_api.football import League
 import requests
-import json
-
+import config
 
 app = Flask(__name__)
-
-# Load configuration from JSON file
-with open('config.json') as config_file:
-    config = json.load(config_file)
 
 
 def fetch_fantasy_data():
     try:
         # Initialize the league object
-        league = League(league_id=config['ESPN_LEAGUE_ID'], year=config['ESPN_SEASON_YEAR'])
+        league = League(league_id=config.ESPN_LEAGUE_ID, year=config.ESPN_SEASON_YEAR)
         
         # Extract relevant team data and format it into a JSON-serializable formatd
         team_data = []
@@ -62,7 +57,7 @@ def webhook():
 def send_message(msg):
     url = 'https://api.groupme.com/v3/bots/post'
     data = {
-        'bot_id': config['BOT_ID'],
+        'bot_id': config.BOT_ID,
         'text': msg
     }
     requests.post(url, json=data)
