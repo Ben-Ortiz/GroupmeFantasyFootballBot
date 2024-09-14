@@ -34,8 +34,10 @@ def webhook():
     if data['sender_type'] == 'bot':
         return "OK", 200
 
-    # Sample response: echo the message back
-    message = data['text'].lower()
+    # This is the message from the chat
+    # message = data['text'].lower()
+
+    message = 'hello'
     
     if 'hello' in message:
         response_message = "Hi there! How can I assist you today?"
