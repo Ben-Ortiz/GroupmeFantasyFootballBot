@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 # NFL Import
 from espn_api.football import League
 import requests
@@ -52,7 +52,7 @@ def webhook():
         response_message = "what you say bruh?"
     
     send_message(response_message)
-    return "OK", 200
+    return jsonify({"status": "OK", "response": response_message}), 200
 
   
   
