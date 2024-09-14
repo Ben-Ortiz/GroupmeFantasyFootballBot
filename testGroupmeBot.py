@@ -35,9 +35,7 @@ def webhook():
         return "OK", 200
 
     # This is the message from the chat
-    # message = data['text'].lower()
-
-    message = 'hello'
+    message = data['text'].lower()
     
     if 'hello' in message:
         response_message = "Hi there! How can I assist you today?"
