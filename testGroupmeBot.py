@@ -5,14 +5,15 @@ import requests
 
 app = Flask(__name__)
 
-BOT_ID = 'asdf'
-ESPN_LEAGUE_ID = 1234  # Replace with your ESPN league ID
-ESPN_SEASON_YEAR = 2024
+# Load configuration from JSON file
+with open('config.json') as config_file:
+    config = json.load(config_file)
+
 
 def fetch_fantasy_data():
     try:
         # Initialize the league object
-        league = League(league_id=1234, year=2024)
+        league = League(league_id=config['ESPN_LEAGUE_ID'], year=config['ESPN_SEASON_YEAR'])
         
         # Extract relevant team data and format it into a JSON-serializable formatd
         team_data = []
@@ -59,7 +60,7 @@ def webhook():
 def send_message(msg):
     url = 'https://api.groupme.com/v3/bots/post'
     data = {
-        'bot_id': BOT_ID,
+        'bot_id': config['BOT_ID'],
         'text': msg
     }
     requests.post(url, json=data)
