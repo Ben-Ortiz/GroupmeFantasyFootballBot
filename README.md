@@ -9,4 +9,7 @@ This is a bot built with python and flask, utilizing [cwebdt94's Python ESPN API
 * Postman: How to test the bot and it's responses using Postman
 
 # What I can improve on
-* Python: Cleaner code, exception handling, logging
+* Python: Cleaner code, exception handling, logging.
+* Functionality:   
+Add weekly announcements based on that week's weekly. Example: week 1, team with starter with most points, and announce that in groupchat
+Add weekly annoucnement based on survival bowl. Example: every week, eliminate team from list of who has the least amount of points. End of season only 1 team remains

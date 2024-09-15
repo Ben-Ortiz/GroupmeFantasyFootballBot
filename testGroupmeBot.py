@@ -20,6 +20,18 @@ def fetch_fantasy_data():
             }
             team_data.append(team_info)
         
+        week_number = 1
+        box_scores = league.box_scores(week=week_number)
+        for box_score in box_scores:
+            bdata = {
+                box_score.home_team.team_name,
+                box_score.away_team.team_name,
+                box_score.home_score,
+                box_score.away_score
+            }
+            team_data.append(bdata)
+
+        # team_data.append(box_scores.home_team.team_name)
         return team_data
     except Exception as e:
         print(f"Error fetching fantasy data: {e}")
