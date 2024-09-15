@@ -13,21 +13,16 @@ def week3_weekly(league):
     max_bench_points = -1
     top_team = None
 
-    # Get the box scores for the given week
     box_scores = league.box_scores(week=week_number)
 
-    # Iterate through each box score to access the teams
     for box_score in box_scores:
-        # Initialize variables to track bench points for both teams
         home_bench_points = sum(player.points for player in box_score.home_lineup if player.lineupSlot == "BE")
         away_bench_points = sum(player.points for player in box_score.away_lineup if player.lineupSlot == "BE")
 
-        # Check if the home team has more bench points than the current max
         if home_bench_points > max_bench_points:
             max_bench_points = home_bench_points
             top_team = box_score.home_team
 
-        # Check if the away team has more bench points than the current max
         if away_bench_points > max_bench_points:
             max_bench_points = away_bench_points
             top_team = box_score.away_team
@@ -48,7 +43,6 @@ def week2_weekly(league):
     top_qb = None
     top_qb_team = None
     stats = []
-
 
     box_scores = league.box_scores(week=week_number)
     for box_score in box_scores:
