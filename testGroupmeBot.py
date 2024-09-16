@@ -129,7 +129,7 @@ def webhook():
     # This is the message from the chat
     message = data['text'].lower()
     
-    if 'hello' in message:
+    if '!hello' in message:
         response_message = "Hi there! How can I assist you today?"
     elif 'fantasy' in message:
         fantasy_data = fetch_fantasy_data()
@@ -138,7 +138,7 @@ def webhook():
             response_message = f"Fantasy league data: {fantasy_data}"
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
-    elif 'weekly1' in message:
+    elif '!weekly1' in message:
         fantasy_data = week1_weekly(league)
         player_name = fantasy_data.get('player_name')
         player_points = fantasy_data.get('player_points')
@@ -148,7 +148,7 @@ def webhook():
             response_message = f"Weekly 1 winner: {player_team}, for player with most points, {player_name} with {player_points} points and wins $5." 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
-    elif 'weekly2' in message:
+    elif '!weekly2' in message:
         fantasy_data = week2_weekly(league)
         # player_name = fantasy_data.get('qb_name')
         if fantasy_data:
@@ -156,7 +156,7 @@ def webhook():
             response_message = f"for qb with longest pass, {fantasy_data}." 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
-    elif 'weekly3' in message:
+    elif '!weekly3' in message:
         fantasy_data = week3_weekly(league)
         team_name = fantasy_data.get('team_name')
         total_points = fantasy_data.get('bench_points')
