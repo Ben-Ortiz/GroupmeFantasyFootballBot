@@ -129,9 +129,12 @@ def webhook():
     # This is the message from the chat
     message = data['text'].lower()
     
+    if not message.startswith('!'):
+            return "OK", 200
+
     if '!hello' in message:
         response_message = "Hi there! How can I assist you today?"
-    elif 'fantasy' in message:
+    elif '!fantasy' in message:
         fantasy_data = fetch_fantasy_data()
         if fantasy_data:
             # You can customize the response based on the data you retrieved
