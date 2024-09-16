@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 # Returns team with most total points from their bench for week 3
 def week3_weekly(league):
-    week_number = 3 # change this to 3
+    week_number = 3
 
     max_bench_points = -1
     top_team = None
