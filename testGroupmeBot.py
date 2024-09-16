@@ -43,6 +43,7 @@ def week2_weekly(league):
     top_qb = None
     top_qb_team = None
     stats = []
+    dummy_response = 'this doesn\'t work right now, try another command' 
 
     box_scores = league.box_scores(week=week_number)
     for box_score in box_scores:
@@ -54,7 +55,7 @@ def week2_weekly(league):
                 stats.append(player.stats)
 
     # Return the top QB information
-    return stats
+    return dummy_response
 
 
 # Returns team with starter who scored the most points for week 1
@@ -156,7 +157,7 @@ def webhook():
         # player_name = fantasy_data.get('qb_name')
         if fantasy_data:
             # You can customize the response based on the data you retrieved
-            response_message = f"for qb with longest pass, {fantasy_data}." 
+            response_message = f"{fantasy_data}." 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly3' in message:
