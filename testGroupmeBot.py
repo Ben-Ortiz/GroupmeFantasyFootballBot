@@ -174,6 +174,8 @@ def webhook():
             response_message = f"Winner of Weekly 3 Bench Warmer - Team with the most total points from their bench: \n\n{team_name} ({total_points} bench points)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
+    elif '!weekly4' in message:
+        response_message = "this isn't ready yet"
     else:
         response_message = "what you say bruh?"
     
