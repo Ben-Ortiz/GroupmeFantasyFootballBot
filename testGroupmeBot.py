@@ -6,6 +6,9 @@ import config
 
 app = Flask(__name__)
 
+def week4_weekly(league):
+    pass
+
 # Returns team with most total points from their bench for week 3
 def week3_weekly(league):
     week_number = 3
@@ -149,7 +152,7 @@ def webhook():
         player_team = fantasy_data.get('player_team')
         if fantasy_data:
             # You can customize the response based on the data you retrieved
-            response_message = f"Weekly 1 winner: {player_team}, for player with most points, {player_name} with {player_points} points and wins $5." 
+            response_message = f"Winner of Weekly 1: Get Schwifty - Team with the single highest scoring starter : {player_team} ({player_name} {player_points}." 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly2' in message:
@@ -167,7 +170,17 @@ def webhook():
         # player_name = fantasy_data.get('qb_name')
         if fantasy_data:
             # You can customize the response based on the data you retrieved
-            response_message = f"Weekly 3 winner: {team_name}, for bench with the most points, {total_points}." 
+            response_message = f"Winner of Weekly 3 Bench Warmer - Team with the most total points from their bench: {team_name} ({total_points} bench points)" 
+        else:
+            response_message = "Sorry, I couldn't fetch the fantasy data."
+    elif '!weekly4' in message:
+        fantasy_data = week4_weekly(league)
+        team_name = fantasy_data.get('team_name')
+        total_points = fantasy_data.get('bench_points')
+        # player_name = fantasy_data.get('qb_name')
+        if fantasy_data:
+            # You can customize the response based on the data you retrieved
+            response_message = f"Winner of Weekly 4 Run Forrest Run! - Team with the starting RB with the most rushing yards : {team_name}, ({player_name} with {player_points} yards." 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     else:
