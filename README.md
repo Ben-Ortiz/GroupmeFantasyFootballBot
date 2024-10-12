@@ -51,6 +51,9 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
         - Example Response:
             - Winner of Weekly 3 Bench Warmer - Team with the most total points from their bench: \n\nTeam Red (88.10 bench points)
 
+# How to Deploy on Glitch
+- Will add this in the future
+
 # What I learned
 * Python: Syntax related to routing, requests, and config
 * Flask: How to use a microframework to build a bot
