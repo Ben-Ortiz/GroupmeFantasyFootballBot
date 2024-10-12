@@ -38,7 +38,18 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
         - If theyre not installed on your machine use the commands:
             - pip install flask
             - pip install espn_api
-    
+    5. To make requests to the bot locally, run Postman
+        - Run a POST request to http://127.0.0.1:5000
+        - Go to Headers
+            - Key: Content-type
+            - Value: application/json
+        - Go to Body
+            - enter a JSON object with:
+                - "sender_type": "user"
+                - "text": "!weekly3"
+        - Send Request
+            - Example Response:
+                - 
 
 # What I learned
 * Python: Syntax related to routing, requests, and config
