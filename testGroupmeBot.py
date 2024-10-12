@@ -34,13 +34,13 @@ def week3_weekly(league):
     if top_team:
         return {
             'team_name': top_team.team_name,
-            'bench_points': max_bench_points
+            'bench_points': f"{max_bench_points:.2f}"
         }
     else:
         return None
 
 # this doesn't work as intended
-# Returns team with starter QB who threw the longest pass (touchdown or not)
+# Returns team with starter QB who threw the longest pass (touchdown or not) for week 2
 def week2_weekly(league):
     week_number = 1 # change this to 2
     longest_pass = -1

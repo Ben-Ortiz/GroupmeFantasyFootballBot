@@ -41,15 +41,15 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
     5. To make requests to the bot locally, run Postman
         - Run a POST request to http://127.0.0.1:5000
         - Go to Headers
-            - Key: Content-type
-            - Value: application/json
+            - Key: "Content-type"
+            - Value: "application/json"
         - Go to Body
             - enter a JSON object with:
                 - "sender_type": "user"
                 - "text": "!weekly3"
         - Send Request
             - Example Response:
-                - 
+                - Winner of Weekly 3 Bench Warmer - Team with the most total points from their bench: \n\nTeam Red (88.10 bench points)
 
 # What I learned
 * Python: Syntax related to routing, requests, and config
