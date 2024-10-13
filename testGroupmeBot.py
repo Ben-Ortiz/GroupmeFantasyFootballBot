@@ -6,7 +6,78 @@ import config
 
 app = Flask(__name__)
 
-# Returns Team with the starting RB with the most rushing yards
+# Returns team that beats its opponent by the smallest margin of victory for week 14
+def week14_weekly(league):
+    pass
+
+# Returns team with a starter closest to 21 points without going over for week 13
+def week13_weekly(league):
+    pass
+
+# Returns team with the starting WR with the most receptions for week 12
+def week12_weekly(league):
+    pass
+
+# Returns team that loses with the highest score for week 11
+def week11_weekly(league):
+    pass
+
+# Returns team that wins with the bigest points of margin of victory for week 10
+def week10_weekly(league):
+    pass
+
+# Returns team closest to their projected point total (over OR under) for week 9
+def week9_weekly(league):
+    pass
+
+# Returns team with highest scoring starter on the bench for week 8
+def week8_weekly(league):
+    pass
+
+# Returns team with the most offensive touchdowns scored with their starters for week 7
+def week7_weekly(league):
+    pass
+
+# Returns team with most points over their weekly project with their starters for week 6
+def week6_weekly(league):
+    pass
+
+# Returns team with any starter closest to 30 points (over OR under) for week 5
+def week5_weekly(league):
+    pass
+
+    week_number = 5
+    target = 30
+    target_player = None
+    player_team = None
+    difference = 500
+
+    box_scores = league.box_scores(week = week_number)
+
+    for box_score in box_scores:
+        for player in box_score.home_lineup + box_score.away_lineup:
+            difference_temp = abs(player.points - target)
+            if difference_temp < difference:
+                difference = difference_temp
+                target_player = player
+
+                if player in box_score.home_lineup:
+                    player_team = box_score.home_team.team_name
+                else:
+                    player_team = box_score.away_team.team_name
+
+    if target_player:
+        return {
+            'team_name': player_team,
+            'player_name': target_player.name,
+            'player_points': target_player.points,
+            'difference': f"{difference:.2f}"
+
+        }
+    else:
+        return None
+
+# Returns team with the starting RB with the most rushing yards for week 4
 def week4_weekly(league):
     week_number = 4
     most_rush_yards = -1
@@ -17,19 +88,20 @@ def week4_weekly(league):
 
     for box_score in box_scores:
         for player in box_score.home_lineup + box_score.away_lineup:
-            if 'breakdown' in player.stats[4] and 'rushingYards' in player.stats[4]['breakdown']:
-                    rushing_yards = player.stats[4]['breakdown']['rushingYards']
-            else:
-                rushing_yards = 0  # Fallback if rushingYards doesn't exist
-            
-            if rushing_yards > most_rush_yards:
-                most_rush_yards = rushing_yards
-                top_rb = player
-            
-                if player in box_score.home_lineup:
-                    top_player_team = box_score.home_team.team_name
+            if player.position == "RB":
+                if 'breakdown' in player.stats[4] and 'rushingYards' in player.stats[4]['breakdown']:
+                        rushing_yards = player.stats[4]['breakdown']['rushingYards']
                 else:
-                    top_player_team = box_score.away_team.team_name
+                    rushing_yards = 0  # Fallback if rushingYards doesn't exist
+                
+                if rushing_yards > most_rush_yards:
+                    most_rush_yards = rushing_yards
+                    top_rb = player
+                
+                    if player in box_score.home_lineup:
+                        top_player_team = box_score.home_team.team_name
+                    else:
+                        top_player_team = box_score.away_team.team_name
 
     if top_rb:
         return {
@@ -159,9 +231,6 @@ def fetch_fantasy_data():
                     'rush yards': top_rushing_yards
                 }
                 team_data.append(player_info)
-
-
-                
             
         return player_info
     except Exception as e:
@@ -228,6 +297,79 @@ def webhook():
         player_rushing_yards = fantasy_data.get('player_rushing_yards')
         if fantasy_data:
             response_message = f"Winner of Weekly 4: Run Forrest Run! - Team with the starting RB with the most rushing yards: \n\n{team_name} ({player_name} {player_rushing_yards} rush yards)" 
+        else:
+            response_message = "Sorry, I couldn't fetch the fantasy data."
+    elif '!weekly5' in message:
+        fantasy_data = week5_weekly(league)
+        team_name = fantasy_data.get('team_name')
+        player_name = fantasy_data.get('player_name')
+        player_points = fantasy_data.get('player_points')
+        difference = fantasy_data.get('difference')
+        if fantasy_data:
+            response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+        else:
+            response_message = "Sorry, I couldn't fetch the fantasy data."
+    elif '!weekly6' in message:
+        fantasy_data = week6_weekly(league)
+        if fantasy_data:
+            response_message = f"method not ready yet"
+            # response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+        else:
+            response_message = "Sorry, I couldn't fetch the fantasy data."
+    elif '!weekly7' in message:
+        fantasy_data = week7_weekly(league)
+        if fantasy_data:
+            response_message = f"method not ready yet"
+            # response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+        else:
+            response_message = "Sorry, I couldn't fetch the fantasy data."
+    elif '!weekly8' in message:
+        fantasy_data = week8_weekly(league)
+        if fantasy_data:
+            response_message = f"method not ready yet"
+            # response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+        else:
+            response_message = "Sorry, I couldn't fetch the fantasy data."
+    elif '!weekly9' in message:
+        fantasy_data = week9_weekly(league)
+        if fantasy_data:
+            response_message = f"method not ready yet"
+            # response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+        else:
+            response_message = "Sorry, I couldn't fetch the fantasy data."
+    elif '!weekly10' in message:
+        fantasy_data = week10_weekly(league)
+        if fantasy_data:
+            response_message = f"method not ready yet"
+            # response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+        else:
+            response_message = "Sorry, I couldn't fetch the fantasy data."
+    elif '!weekly11' in message:
+        fantasy_data = week11_weekly(league)
+        if fantasy_data:
+            response_message = f"method not ready yet"
+            # response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+        else:
+            response_message = "Sorry, I couldn't fetch the fantasy data."
+    elif '!weekly12' in message:
+        fantasy_data = week12_weekly(league)
+        if fantasy_data:
+            response_message = f"method not ready yet"
+            # response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+        else:
+            response_message = "Sorry, I couldn't fetch the fantasy data."
+    elif '!weekly13' in message:
+        fantasy_data = week13_weekly(league)
+        if fantasy_data:
+            response_message = f"method not ready yet"
+            # response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+        else:
+            response_message = "Sorry, I couldn't fetch the fantasy data."
+    elif '!weekly14' in message:
+        fantasy_data = week14_weekly(league)
+        if fantasy_data:
+            response_message = f"method not ready yet"
+            # response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     else:
