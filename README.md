@@ -9,7 +9,7 @@ An example response would be "Winner of Weekly 1: Team Red - Team with the singl
 So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scored 35 fantasy points.
 
 ### The Weeklys are:  
-- [x] WEEK 1: Get Schwifty - Team with the single highest scoring starter   
+- :check_mark WEEK 1: Get Schwifty - Team with the single highest scoring starter   
 - [ ] WEEK 2: Chicks Dig The Long Ball - Team with the starting QB with the longest pass   
 - [x] WEEK 3: Bench Warmer - Team with the most total points from their bench   
 - [x] WEEK 4: Run Forrest Run! - Team with the starting RB with the most rushing yards  
