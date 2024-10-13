@@ -8,7 +8,41 @@ app = Flask(__name__)
 
 # Returns Team with the starting RB with the most rushing yards
 def week4_weekly(league):
-    pass 
+    week_number = 4
+    most_rush_yards = -1
+    top_rb = None
+    top_rb_team = None
+
+    box_scores = league.box_scores(week=week_number)
+
+    for box_score in box_scores:
+        for player in box_score.home_lineup + box_score.away_lineup:
+            if 'breakdown' in player.stats[4] and 'rushingYards' in player.stats[4]['breakdown']:
+                    rushing_yards = player.stats[4]['breakdown']['rushingYards']
+            else:
+                rushing_yards = 0  # Fallback if rushingYards doesn't exist
+            
+            if rushing_yards > most_rush_yards:
+                most_rush_yards = rushing_yards
+                top_rb = player
+            
+                if player in box_score.home_lineup:
+                    top_player_team = box_score.home_team.team_name
+                else:
+                    top_player_team = box_score.away_team.team_name
+
+    if top_rb:
+        return {
+            'player_name': top_rb.name,
+            'player_rushing_yards': most_rush_yards,
+            'team_name': top_player_team
+
+        }
+    else:
+        return None
+            
+
+
 
 # Returns team with most total points from their bench for week 3
 def week3_weekly(league):
@@ -91,6 +125,7 @@ def week1_weekly(league):
     else:
         return None
 
+# this method is for testing
 def fetch_fantasy_data():
     try:
         # Initialize the league object
@@ -98,25 +133,37 @@ def fetch_fantasy_data():
         
         # Extract relevant team data and format it into a JSON-serializable formatd
         team_data = []
-        for team in league.teams:
-            team_info = {
-                'team_name': team.team_name
-            }
-            team_data.append(team_info)
+        # for team in league.teams:
+        #     team_info = {
+        #         'team_name': team.team_name
+        #     }
+        #     team_data.append(team_info)
         
-        week_number = 1
+        top_rushing_yards = 0
+        top_player = None
+        week_number = 4
         box_scores = league.box_scores(week=week_number)
         for box_score in box_scores:
             for player in box_score.home_lineup + box_score.away_lineup:
+                if 'breakdown' in player.stats[4] and 'rushingYards' in player.stats[4]['breakdown']:
+                    rushing_yards = player.stats[4]['breakdown']['rushingYards']
+                else:
+                    rushing_yards = 0  # Fallback if rushingYards doesn't exist
+                
+                if rushing_yards > top_rushing_yards:
+                    top_rushing_yards = rushing_yards
+                    top_player = player
+                
                 player_info = {
-                    'player_name:': player.name,
-                    'player_points': player.points,
-                    'player_team': player.team
+                    'player_name': player,
+                    'rush yards': top_rushing_yards
                 }
-
                 team_data.append(player_info)
+
+
+                
             
-        return team_data
+        return player_info
     except Exception as e:
         print(f"Error fetching fantasy data: {e}")
         return None
@@ -171,7 +218,16 @@ def webhook():
         # player_name = fantasy_data.get('qb_name')
         if fantasy_data:
             # You can customize the response based on the data you retrieved
-            response_message = f"Winner of Weekly 3 Bench Warmer - Team with the most total points from their bench: \n\n{team_name} ({total_points} bench points)" 
+            response_message = f"Winner of Weekly 3: Bench Warmer - Team with the most total points from their bench: \n\n{team_name} ({total_points} bench points)" 
+        else:
+            response_message = "Sorry, I couldn't fetch the fantasy data."
+    elif '!weekly4' in message:
+        fantasy_data = week4_weekly(league)
+        team_name = fantasy_data.get('team_name')
+        player_name = fantasy_data.get('player_name')
+        player_rushing_yards = fantasy_data.get('player_rushing_yards')
+        if fantasy_data:
+            response_message = f"Winner of Weekly 4: Run Forrest Run! - Team with the starting RB with the most rushing yards: \n\n{team_name} ({player_name} {player_rushing_yards} rush yards)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     else:
