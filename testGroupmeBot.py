@@ -311,63 +311,63 @@ def webhook():
         fantasy_data = week6_weekly(league)
         if fantasy_data:
             response_message = f"method not ready yet"
-            # response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+            # response_message = f"Winner of Weekly 6: Over Achiever - Team with most points over their weekly projections with their starters: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly7' in message:
         fantasy_data = week7_weekly(league)
         if fantasy_data:
             response_message = f"method not ready yet"
-            # response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+            # response_message = f"Winner of Weekly 7: Touchdown Thurman Thomas - Team with the most offensive touchdowns scored with their starters: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly8' in message:
         fantasy_data = week8_weekly(league)
         if fantasy_data:
             response_message = f"method not ready yet"
-            # response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+            # response_message = f"Winner of Weekly 8: Should have Swiped Right - Team with the highest scorer on the bench: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly9' in message:
         fantasy_data = week9_weekly(league)
         if fantasy_data:
             response_message = f"method not ready yet"
-            # response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+            # response_message = f"Winner of Weekly 9: Bulls-eye - Team closest to their peojcted point toetal (over OR under): \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly10' in message:
         fantasy_data = week10_weekly(league)
         if fantasy_data:
             response_message = f"method not ready yet"
-            # response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+            # response_message = f"Winner of Weekly 10: Blownout.com/rekt - Team that wins with the biggest points margin of victory: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly11' in message:
         fantasy_data = week11_weekly(league)
         if fantasy_data:
             response_message = f"method not ready yet"
-            # response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+            # response_message = f"Winner of Weekly 11: Best Loser - Team that loses with the highest score: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly12' in message:
         fantasy_data = week12_weekly(league)
         if fantasy_data:
             response_message = f"method not ready yet"
-            # response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+            # response_message = f"Winner of Weekly 12: Gotta Catch Em All - Team with the starting WR with the most receptions: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly13' in message:
         fantasy_data = week13_weekly(league)
         if fantasy_data:
             response_message = f"method not ready yet"
-            # response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+            # response_message = f"Winner of Weekly 13: Blackjack - Team with a starter closest to 21 points without going over: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly14' in message:
         fantasy_data = week14_weekly(league)
         if fantasy_data:
             response_message = f"method not ready yet"
-            # response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+            # response_message = f"Winner of Weekly 14: Photo Finish - Team that beats its opponent by the smallest margin of victory: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     else:
