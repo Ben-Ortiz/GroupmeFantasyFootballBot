@@ -38,7 +38,7 @@ def week8_weekly(league):
 def week7_weekly(league):
     pass
 
-# Returns team with most points over their weekly project with their starters for week 6
+# Returns team with most points over their weekly projection with their starters for week 6
 def week6_weekly(league):
     pass
 
