@@ -40,6 +40,9 @@ def week7_weekly(league):
 
 # Returns team with most points over their weekly projection with their starters for week 6
 def week6_weekly(league):
+    week_number = 1
+    top_team = None
+    total_points = 0
     pass
 
 # Returns team with any starter closest to 30 points (over OR under) for week 5
