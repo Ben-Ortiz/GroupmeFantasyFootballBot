@@ -10,19 +10,19 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
 
 ### The Weeklys are:  
 - ✅ WEEK 1: Get Schwifty - Team with the single highest scoring starter   
-- [ ] WEEK 2: Chicks Dig The Long Ball - Team with the starting QB with the longest pass   
+- WEEK 2: Chicks Dig The Long Ball - Team with the starting QB with the longest pass   
 - ✅ WEEK 3: Bench Warmer - Team with the most total points from their bench   
 - ✅ WEEK 4: Run Forrest Run! - Team with the starting RB with the most rushing yards  
 - ✅ WEEK 5: Dirty 30 - Team with any starter closest to 30 points (over OR under)  
 - ✅ WEEK 6: Over Achiever: Team with most points over their weekly projection with their starters  
-- [ ] WEEK 7: Touchdown Thurman Thomas - Team with the most offensive touchdowns scored with their starters  
-- [ ] WEEK 8: Should Have Swiped Right - Team with the highest scorer on the bench  
-- [ ] WEEK 9: Bulls-eye - Team closest to their projected point total (over OR under)  
-- [ ] WEEK 10: Blownout.com/rekt - Team that wins with the biggest points margin of victory  
-- [ ] WEEK 11: Best Loser - Team that loses with the highest score  
-- [ ] WEEK 12: Gotta Catch Em All - Team with the WR with the most receptions (bench players don't count)  
-- [ ] WEEK 13: Blackjack - Team with a starter closest to 21 points without going over  
-- [ ] WEEK 14: Photo Finish – Team that beats its opponent by the smallest margin of victory  
+- WEEK 7: Touchdown Thurman Thomas - Team with the most offensive touchdowns scored with their starters  
+- WEEK 8: Should Have Swiped Right - Team with the highest scorer on the bench  
+- WEEK 9: Bulls-eye - Team closest to their projected point total (over OR under)  
+- WEEK 10: Blownout.com/rekt - Team that wins with the biggest points margin of victory  
+- WEEK 11: Best Loser - Team that loses with the highest score  
+- WEEK 12: Gotta Catch Em All - Team with the WR with the most receptions (bench players don't count)  
+- WEEK 13: Blackjack - Team with a starter closest to 21 points without going over  
+- WEEK 14: Photo Finish – Team that beats its opponent by the smallest margin of victory  
 
 # How to test
 1. Git clone into your machine  
