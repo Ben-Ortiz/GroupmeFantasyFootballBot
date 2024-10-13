@@ -40,10 +40,41 @@ def week7_weekly(league):
 
 # Returns team with most points over their weekly projection with their starters for week 6
 def week6_weekly(league):
-    week_number = 1
+    week_number = 1 #change this to 6
     top_team = None
-    total_points = 0
-    pass
+    total_points_projected = 0
+    total_points_actual = 0
+    max_difference = -1
+
+    box_scores = league.box_scores(week = week_number)
+    for box_score in box_scores:
+        home_team_actual_points = box_score.home_score
+        home_team_projected_points = box_score.home_projected
+
+        home_difference = home_team_actual_points - home_team_projected_points
+
+        away_team_actual_points = box_score.away_score
+        away_team_projected_points = box_score.away_projected
+
+        away_difference = away_team_actual_points - away_team_projected_points
+
+        if home_difference > max_difference:
+            max_difference = home_difference
+            top_team = box_score.home_team
+            total_points_projected = box_score.home_projected
+            total_points_actual = box_score.home_score
+        if away_difference > max_difference:
+            max_difference = away_difference
+            top_team = box_score.away_team
+            total_points_projected = box_score.away_projected
+            total_points_actual = box_score.away_score
+
+    
+    return {
+        'team_name': top_team,
+        'team_points_projected': total_points_projected,
+        'team_points_actual': total_points_actual
+    }
 
 # Returns team with any starter closest to 30 points (over OR under) for week 5
 def week5_weekly(league):
@@ -313,63 +344,63 @@ def webhook():
     elif '!weekly6' in message:
         fantasy_data = week6_weekly(league)
         if fantasy_data:
-            response_message = f"method not ready yet"
+            response_message = f"{fantasy_data}"
             # response_message = f"Winner of Weekly 6: Over Achiever - Team with most points over their weekly projections with their starters: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly7' in message:
         fantasy_data = week7_weekly(league)
         if fantasy_data:
-            response_message = f"method not ready yet"
+            response_message = f"{fantasy_data}"
             # response_message = f"Winner of Weekly 7: Touchdown Thurman Thomas - Team with the most offensive touchdowns scored with their starters: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly8' in message:
         fantasy_data = week8_weekly(league)
         if fantasy_data:
-            response_message = f"method not ready yet"
+            response_message = f"{fantasy_data}"
             # response_message = f"Winner of Weekly 8: Should have Swiped Right - Team with the highest scorer on the bench: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly9' in message:
         fantasy_data = week9_weekly(league)
         if fantasy_data:
-            response_message = f"method not ready yet"
+            response_message = f"{fantasy_data}"
             # response_message = f"Winner of Weekly 9: Bulls-eye - Team closest to their peojcted point toetal (over OR under): \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly10' in message:
         fantasy_data = week10_weekly(league)
         if fantasy_data:
-            response_message = f"method not ready yet"
+            response_message = f"{fantasy_data}"
             # response_message = f"Winner of Weekly 10: Blownout.com/rekt - Team that wins with the biggest points margin of victory: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly11' in message:
         fantasy_data = week11_weekly(league)
         if fantasy_data:
-            response_message = f"method not ready yet"
+            response_message = f"{fantasy_data}"
             # response_message = f"Winner of Weekly 11: Best Loser - Team that loses with the highest score: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly12' in message:
         fantasy_data = week12_weekly(league)
         if fantasy_data:
-            response_message = f"method not ready yet"
+            response_message = f"{fantasy_data}"
             # response_message = f"Winner of Weekly 12: Gotta Catch Em All - Team with the starting WR with the most receptions: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly13' in message:
         fantasy_data = week13_weekly(league)
         if fantasy_data:
-            response_message = f"method not ready yet"
+            response_message = f"{fantasy_data}"
             # response_message = f"Winner of Weekly 13: Blackjack - Team with a starter closest to 21 points without going over: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly14' in message:
         fantasy_data = week14_weekly(league)
         if fantasy_data:
-            response_message = f"method not ready yet"
+            response_message = f"{fantasy_data}"
             # response_message = f"Winner of Weekly 14: Photo Finish - Team that beats its opponent by the smallest margin of victory: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
