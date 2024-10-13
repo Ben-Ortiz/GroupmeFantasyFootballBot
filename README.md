@@ -9,12 +9,12 @@ An example response would be "Winner of Weekly 1: Team Red - Team with the singl
 So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scored 35 fantasy points.
 
 ### The Weeklys are:  
-- :check_mark WEEK 1: Get Schwifty - Team with the single highest scoring starter   
+- ✅ WEEK 1: Get Schwifty - Team with the single highest scoring starter   
 - [ ] WEEK 2: Chicks Dig The Long Ball - Team with the starting QB with the longest pass   
-- [x] WEEK 3: Bench Warmer - Team with the most total points from their bench   
-- [x] WEEK 4: Run Forrest Run! - Team with the starting RB with the most rushing yards  
-- [x] WEEK 5: Dirty 30 - Team with any starter closest to 30 points (over OR under)  
-- [x] WEEK 6: Over Achiever: Team with most points over their weekly projection with their starters  
+- ✅ WEEK 3: Bench Warmer - Team with the most total points from their bench   
+- ✅ WEEK 4: Run Forrest Run! - Team with the starting RB with the most rushing yards  
+- ✅ WEEK 5: Dirty 30 - Team with any starter closest to 30 points (over OR under)  
+- ✅ WEEK 6: Over Achiever: Team with most points over their weekly projection with their starters  
 - [ ] WEEK 7: Touchdown Thurman Thomas - Team with the most offensive touchdowns scored with their starters  
 - [ ] WEEK 8: Should Have Swiped Right - Team with the highest scorer on the bench  
 - [ ] WEEK 9: Bulls-eye - Team closest to their projected point total (over OR under)  
