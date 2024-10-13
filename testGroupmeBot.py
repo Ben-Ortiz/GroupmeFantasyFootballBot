@@ -44,8 +44,6 @@ def week6_weekly(league):
 
 # Returns team with any starter closest to 30 points (over OR under) for week 5
 def week5_weekly(league):
-    pass
-
     week_number = 5
     target = 30
     target_player = None
