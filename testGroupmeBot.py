@@ -249,18 +249,10 @@ def fetch_fantasy_data():
         box_scores = league.box_scores(week=week_number)
         for box_score in box_scores:
             for player in box_score.home_lineup + box_score.away_lineup:
-                if 'breakdown' in player.stats[4] and 'rushingYards' in player.stats[4]['breakdown']:
-                    rushing_yards = player.stats[4]['breakdown']['rushingYards']
-                else:
-                    rushing_yards = 0  # Fallback if rushingYards doesn't exist
-                
-                if rushing_yards > top_rushing_yards:
-                    top_rushing_yards = rushing_yards
-                    top_player = player
-                
+
                 player_info = {
-                    'player_name': player,
-                    'rush yards': top_rushing_yards
+                    'player_name': player.name,
+                    'data':player.stats
                 }
                 team_data.append(player_info)
             
@@ -343,9 +335,19 @@ def webhook():
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly6' in message:
         fantasy_data = week6_weekly(league)
+        
+        team_name = fantasy_data.get('team_name')
+        team__points_projected = fantasy_data.get('team_points_projected')
+        team_points_actual = fantasy_data.get('team_points_actual')
+        difference = team_points_actual - team__points_projected
+
+        clean_team_name = team_name.team_name
+        team__points_projected_formatted = f"{team__points_projected:.2f}"
+        team_points_actual_formatted = f"{team_points_actual:.2f}"
+        difference_formatted = f"{difference:.2f}"
+
         if fantasy_data:
-            response_message = f"{fantasy_data}"
-            # response_message = f"Winner of Weekly 6: Over Achiever - Team with most points over their weekly projections with their starters: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+            response_message = f"Winner of Weekly 6: Over Achiever - Team with most points over their weekly projections with their starters: \n\n{clean_team_name} (points projected: {team__points_projected_formatted} points, points actual: {team_points_actual_formatted} points, {difference_formatted} difference)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly7' in message:
