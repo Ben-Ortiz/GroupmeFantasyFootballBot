@@ -30,9 +30,35 @@ def week10_weekly(league):
 def week9_weekly(league):
     pass
 
-# Returns team with highest scoring starter on the bench for week 8
+# Returns team with highest scoring player on the bench for week 8
 def week8_weekly(league):
-    pass
+    week_number = 1 # change this to 8
+    top_team = None
+    top_player = None
+    top_player_points = 0
+    box_scores = league.box_scores(week = week_number)
+    
+    for box_score in box_scores:
+        for player in box_score.home_lineup + box_score.away_lineup:
+            if player.slot_position == "BE":
+                if player.points > top_player_points:
+                    top_player_points = player.points
+                    top_player = player
+                    
+                    if top_player in box_score.home_lineup:
+                        top_team = box_score.home_team.team_name
+                    else:
+                        top_team = box_score.away_team.team_name        
+    
+    if top_team:
+        return {
+            'top_team': top_team,
+            'top_player': top_player.name,
+            'top_player_points': top_player_points
+        }
+    else:
+        return None
+                
 
 # Returns team with the most offensive touchdowns scored with their starters for week 7
 def week7_weekly(league):
@@ -418,15 +444,18 @@ def webhook():
         team_total_tds = fantasy_data.get('top_team_tds')
 
         if fantasy_data:
-            # response_message = f"{fantasy_data}"
             response_message = f"Winner of Weekly 7: Touchdown Thurman Thomas - Team with the most offensive touchdowns scored with their starters: \n\n{team_name} ({team_total_tds} tds)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly8' in message:
         fantasy_data = week8_weekly(league)
+        
+        team_name = fantasy_data.get("top_team")
+        player_name = fantasy_data.get("top_player")
+        player_points = fantasy_data.get("top_player_points")
+        
         if fantasy_data:
-            response_message = f"{fantasy_data}"
-            # response_message = f"Winner of Weekly 8: Should have Swiped Right - Team with the highest scorer on the bench: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+            response_message = f"Winner of Weekly 8: Should have Swiped Right - Team with the highest scorer on the bench: \n\n{team_name} ({player_name} {player_points} points)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly9' in message:
