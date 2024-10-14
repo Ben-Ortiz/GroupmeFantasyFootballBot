@@ -64,6 +64,6 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
 # What I can improve on
 * Python: Cleaner code, exception handling, logging.
 * Functionality:   
-    - ✅ Add weekly announcements based on that week's weekly. Example: week 1, team with starter with most points, and announce that in groupchat.  
+    - ✅ Add weekly announcements based on that week's weekly. Example: week 1, team with starter with most points, and announce that in groupchat when giving a command in the format of !weekly#, where # is the week number. Example: !weekly2.  
     - Add weekly annoucnement based on survival bowl. Example: every week, eliminate team from list of who has the least amount of points. End of season only 1 team remains.  
     - Put logic for ties (2 teams have same score and how to resolve those ties)
