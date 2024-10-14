@@ -184,7 +184,7 @@ def week4_weekly(league):
         for player in box_score.home_lineup + box_score.away_lineup:
             if player.position == "RB":
                 if 'breakdown' in player.stats[4] and 'rushingYards' in player.stats[4]['breakdown']:
-                        rushing_yards = player.stats[4]['breakdown']['rushingYards']
+                        rushing_yards = player.stats[4]['breakdown'].get('rushingYards', 0)
                 else:
                     rushing_yards = 0  # Fallback if rushingYards doesn't exist
                 
