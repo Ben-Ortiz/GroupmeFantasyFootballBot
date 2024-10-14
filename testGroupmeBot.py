@@ -28,7 +28,37 @@ def week10_weekly(league):
 
 # Returns team closest to their projected point total (over OR under) for week 9
 def week9_weekly(league):
-    pass
+    # pass
+    week_number = 1 # change this to 9
+    top_team = None
+    difference = 500
+    actual_score = 0
+    projected_score = 0
+    
+    box_scores = league.box_scores(week = week_number)
+    
+    for box_score in box_scores:
+        difference_home = abs(box_score.home_score - box_score.home_projected)
+        if difference_home < difference:
+            difference = difference_home
+            top_team = box_score.home_team
+            actual_score = box_score.home_score
+            projected_score = box_score.home_projected
+        
+        difference_away = abs(box_score.away_score - box_score.away_projected)
+        if difference_away < difference:
+            difference = difference_away
+            top_team = box_score.away_team
+            actual_score = box_score.away_score
+            projected_score = box_score.away_projected
+        
+    return {
+        "top_team": top_team.team_name,
+        "difference": difference,
+        "actual_score": actual_score,
+        "projected_score": projected_score
+    }
+    
 
 # Returns team with highest scoring player on the bench for week 8
 def week8_weekly(league):
@@ -460,9 +490,15 @@ def webhook():
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly9' in message:
         fantasy_data = week9_weekly(league)
+
+        team_name = fantasy_data.get("top_team")
+        difference = fantasy_data.get("difference")
+        actual_score = fantasy_data.get("actual_score")
+        projected_score = fantasy_data.get("projected_score")
+        
         if fantasy_data:
-            response_message = f"{fantasy_data}"
-            # response_message = f"Winner of Weekly 9: Bulls-eye - Team closest to their peojcted point toetal (over OR under): \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+            # response_message = f"{fantasy_data}"
+            response_message = f"Winner of Weekly 9: Bulls-eye - Team closest to their projcted point total (over OR under): \n\n{team_name} (Projected: {projected_score} points, Actual: {actual_score} points, difference of {difference:.2f} points)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly10' in message:

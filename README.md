@@ -18,7 +18,7 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
 - ✅ WEEK 6: Over Achiever: Team with most points over their weekly projection with their starters  
 - ✅ WEEK 7: Touchdown Thurman Thomas - Team with the most offensive touchdowns scored with their starters  
 - ✅ WEEK 8: Should Have Swiped Right - Team with the highest scorer on the bench  
-- WEEK 9: Bulls-eye - Team closest to their projected point total (over OR under)  
+- ✅ WEEK 9: Bulls-eye - Team closest to their projected point total (over OR under)  
 - WEEK 10: Blownout.com/rekt - Team that wins with the biggest points margin of victory  
 - WEEK 11: Best Loser - Team that loses with the highest score  
 - WEEK 12: Gotta Catch Em All - Team with the starting WR with the most receptions    
