@@ -39,50 +39,61 @@ def week7_weekly(league):
     week_number = 1 #change this to 7
     top_team_tds = -1
     top_team = None
-    total_tds_home = 0
-    total_tds_away = 0
+    
     total_tds_home_cum = 0
     total_tds_away_cum = 0
+
+    rush_tds = 0
+    receiving_tds = 0
+    passing_tds = 0
 
     box_scores = league.box_scores(week=week_number)
     teams = []
     lineup = []
+    test = []
+    testdict = {}
     for box_score in box_scores:
+
+
+        
+        total_tds_home = 0
+        total_tds_away = 0
+
+        # Process home team lineup
         for player in box_score.home_lineup:
-            if player.position != "D/ST":
-                if 'breakdown' in player.stats[week_number] and 'receivingTouchdowns' in player.stats[week_number]['breakdown'] and 'rushingTouchdowns' in player.stats[week_number]['breakdown']:
-                    rush_tds = player.stats[week_number]['breakdown']['receivingTouchdowns']
-                    receiving_tds = player.stats[week_number]['breakdown']['rushingTouchdowns']
-                    total_tds_home = rush_tds + receiving_tds 
-                    total_tds_home_cum += total_tds_home
-            lineup.append(player)
-            lineup.append(total_tds_home)
+            if player.slot_position != "D/ST" and player.slot_position != "BE":
+                # Initialize rush_tds, receiving_tds, and passing_tds to 0
+                rush_tds = player.stats[week_number]['breakdown'].get('rushingTouchdowns', 0)
+                receiving_tds = player.stats[week_number]['breakdown'].get('receivingTouchdowns', 0)
+                passing_tds = player.stats[week_number]['breakdown'].get('passingTouchdowns', 0)
 
+                # Accumulate total touchdowns for the home team
+                total_tds_home += rush_tds + receiving_tds + passing_tds
+
+        # Initialize home team in the dictionary if not present
+        if box_score.home_team not in testdict:
+            testdict[box_score.home_team] = 0
+        # Update total touchdowns for the home team
+        testdict[box_score.home_team] += total_tds_home
+
+
+
+
+        # Process away team lineup
         for player in box_score.away_lineup:
-            if player.position != "D/ST":
-                if 'breakdown' in player.stats[week_number] and 'receivingTouchdowns' in player.stats[week_number]['breakdown'] and 'rushingTouchdowns' in player.stats[week_number]['breakdown']:
-                    rush_tds = player.stats[week_number]['breakdown']['receivingTouchdowns']
-                    receiving_tds = player.stats[week_number]['breakdown']['rushingTouchdowns']
-                    total_tds_away = rush_tds + receiving_tds
-                    total_tds_away_cum += total_tds_away
-            lineup.append(player)
-            lineup.append(total_tds_away)
+            if player.slot_position != "D/ST" and player.slot_position != "BE":
+                rush_tds = player.stats[week_number]['breakdown'].get('rushingTouchdowns', 0)
+                receiving_tds = player.stats[week_number]['breakdown'].get('receivingTouchdowns', 0)
+                passing_tds = player.stats[week_number]['breakdown'].get('passingTouchdowns', 0)
 
-        teams.append(box_score.home_team)
-        teams.append(total_tds_home_cum)
-        
-        teams.append(box_score.away_team)
-        teams.append(total_tds_away_cum)
+                # Accumulate total touchdowns for the away team
+                total_tds_away += rush_tds + receiving_tds + passing_tds
 
-        if total_tds_home_cum > total_tds_away_cum:
-            top_team = box_score.home_team
-            top_team_tds = total_tds_home_cum
-        else:
-            top_team = box_score.away_team
-            top_team_tds = total_tds_away_cum
-
-        
-        
+        # Initialize away team in the dictionary if not present
+        if box_score.away_team not in testdict:
+            testdict[box_score.away_team] = 0
+        # Update total touchdowns for the away team
+        testdict[box_score.away_team] += total_tds_away    
 
         
 
@@ -90,8 +101,8 @@ def week7_weekly(league):
         return {
             # 'team_name': top_team.team_name,
             # 'top_team_tds': top_team_tds,
-            # 'data': teams,
-            'data2': lineup
+            'data': testdict,
+            # 'data2': lineup
         }
     else:
         return None
