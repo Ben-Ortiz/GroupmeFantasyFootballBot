@@ -47,7 +47,8 @@ def week7_weekly(league):
     box_scores = league.box_scores(week=week_number)
     team_dict = {}
     for box_score in box_scores:
-  
+        
+        # Reset total_tds_home and total_tds_away to 0 to accumulate tds of each team
         total_tds_home = 0
         total_tds_away = 0
 
