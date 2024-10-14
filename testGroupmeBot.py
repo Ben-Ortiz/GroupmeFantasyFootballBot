@@ -37,25 +37,17 @@ def week8_weekly(league):
 # Returns team with the most offensive touchdowns scored with their starters for week 7
 def week7_weekly(league):
     week_number = 1 #change this to 7
-    top_team_tds = -1
     top_team = None
-    
-    total_tds_home_cum = 0
-    total_tds_away_cum = 0
+    top_team_tds = 0
 
     rush_tds = 0
     receiving_tds = 0
     passing_tds = 0
 
     box_scores = league.box_scores(week=week_number)
-    teams = []
-    lineup = []
-    test = []
-    testdict = {}
+    team_dict = {}
     for box_score in box_scores:
-
-
-        
+  
         total_tds_home = 0
         total_tds_away = 0
 
@@ -71,13 +63,10 @@ def week7_weekly(league):
                 total_tds_home += rush_tds + receiving_tds + passing_tds
 
         # Initialize home team in the dictionary if not present
-        if box_score.home_team not in testdict:
-            testdict[box_score.home_team] = 0
+        if box_score.home_team not in team_dict:
+            team_dict[box_score.home_team] = 0
         # Update total touchdowns for the home team
-        testdict[box_score.home_team] += total_tds_home
-
-
-
+        team_dict[box_score.home_team] += total_tds_home
 
         # Process away team lineup
         for player in box_score.away_lineup:
@@ -90,19 +79,19 @@ def week7_weekly(league):
                 total_tds_away += rush_tds + receiving_tds + passing_tds
 
         # Initialize away team in the dictionary if not present
-        if box_score.away_team not in testdict:
-            testdict[box_score.away_team] = 0
+        if box_score.away_team not in team_dict:
+            team_dict[box_score.away_team] = 0
         # Update total touchdowns for the away team
-        testdict[box_score.away_team] += total_tds_away    
+        team_dict[box_score.away_team] += total_tds_away
 
-        
 
-    if top_team:
+    top_team = max(team_dict, key=team_dict.get)
+    top_team_tds = team_dict[top_team]
+
+    if team_dict:
         return {
-            # 'team_name': top_team.team_name,
-            # 'top_team_tds': top_team_tds,
-            'data': testdict,
-            # 'data2': lineup
+            'team_name': top_team.team_name,
+            'top_team_tds': top_team_tds
         }
     else:
         return None
@@ -424,9 +413,12 @@ def webhook():
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly7' in message:
         fantasy_data = week7_weekly(league)
+        team_name = fantasy_data.get('team_name')
+        team_total_tds = fantasy_data.get('top_team_tds')
+
         if fantasy_data:
-            response_message = f"{fantasy_data}"
-            # response_message = f"Winner of Weekly 7: Touchdown Thurman Thomas - Team with the most offensive touchdowns scored with their starters: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+            # response_message = f"{fantasy_data}"
+            response_message = f"Winner of Weekly 7: Touchdown Thurman Thomas - Team with the most offensive touchdowns scored with their starters: \n\n{team_name} ({team_total_tds} tds)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly8' in message:
