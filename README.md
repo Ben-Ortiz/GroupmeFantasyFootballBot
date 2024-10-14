@@ -2,6 +2,7 @@
 This is a bot built with python and flask, utilizing [cwebdt94's Python ESPN API](https://github.com/cwendt94/espn-api), to send messages to a group chat in Groupme about Fantasy Football related data, deployed on [Glitch](https://glitch.com)
 
 The bot's purpose is to respond with the winning team based on the "weekly" if you message the GroupMe chat with the command "!weekly#, where # is the week number.  
+  
 A "weekly" is an achievement for a team that meets a certain condition. If they meet it, they win that week's weekly.  
   
 To get a response from the bot, you would type for example, "!weekly1" to find out the winner for the week 1 weekly.  
