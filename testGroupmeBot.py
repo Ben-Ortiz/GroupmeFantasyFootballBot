@@ -36,7 +36,66 @@ def week8_weekly(league):
 
 # Returns team with the most offensive touchdowns scored with their starters for week 7
 def week7_weekly(league):
-    pass
+    week_number = 1 #change this to 7
+    top_team_tds = -1
+    top_team = None
+    total_tds_home = 0
+    total_tds_away = 0
+    total_tds_home_cum = 0
+    total_tds_away_cum = 0
+
+    box_scores = league.box_scores(week=week_number)
+    teams = []
+    lineup = []
+    for box_score in box_scores:
+        for player in box_score.home_lineup:
+            if player.position != "D/ST":
+                if 'breakdown' in player.stats[week_number] and 'receivingTouchdowns' in player.stats[week_number]['breakdown'] and 'rushingTouchdowns' in player.stats[week_number]['breakdown']:
+                    rush_tds = player.stats[week_number]['breakdown']['receivingTouchdowns']
+                    receiving_tds = player.stats[week_number]['breakdown']['rushingTouchdowns']
+                    total_tds_home = rush_tds + receiving_tds 
+                    total_tds_home_cum += total_tds_home
+            lineup.append(player)
+            lineup.append(total_tds_home)
+
+        for player in box_score.away_lineup:
+            if player.position != "D/ST":
+                if 'breakdown' in player.stats[week_number] and 'receivingTouchdowns' in player.stats[week_number]['breakdown'] and 'rushingTouchdowns' in player.stats[week_number]['breakdown']:
+                    rush_tds = player.stats[week_number]['breakdown']['receivingTouchdowns']
+                    receiving_tds = player.stats[week_number]['breakdown']['rushingTouchdowns']
+                    total_tds_away = rush_tds + receiving_tds
+                    total_tds_away_cum += total_tds_away
+            lineup.append(player)
+            lineup.append(total_tds_away)
+
+        teams.append(box_score.home_team)
+        teams.append(total_tds_home_cum)
+        
+        teams.append(box_score.away_team)
+        teams.append(total_tds_away_cum)
+
+        if total_tds_home_cum > total_tds_away_cum:
+            top_team = box_score.home_team
+            top_team_tds = total_tds_home_cum
+        else:
+            top_team = box_score.away_team
+            top_team_tds = total_tds_away_cum
+
+        
+        
+
+        
+
+    if top_team:
+        return {
+            # 'team_name': top_team.team_name,
+            # 'top_team_tds': top_team_tds,
+            # 'data': teams,
+            'data2': lineup
+        }
+    else:
+        return None
+
 
 # Returns team with most points over their weekly projection with their starters for week 6
 def week6_weekly(league):
@@ -69,12 +128,14 @@ def week6_weekly(league):
             total_points_projected = box_score.away_projected
             total_points_actual = box_score.away_score
 
-    
-    return {
-        'team_name': top_team,
-        'team_points_projected': total_points_projected,
-        'team_points_actual': total_points_actual
-    }
+    if top_team:
+        return {
+            'team_name': top_team,
+            'team_points_projected': total_points_projected,
+            'team_points_actual': total_points_actual
+        }
+    else:
+        return None
 
 # Returns team with any starter closest to 30 points (over OR under) for week 5
 def week5_weekly(league):
