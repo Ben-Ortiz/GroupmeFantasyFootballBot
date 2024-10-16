@@ -20,11 +20,34 @@ def week12_weekly(league):
 
 # Returns team that loses with the highest score for week 11
 def week11_weekly(league):
-    pass
+    week_number = 11 # change this to 11
+    top_loser = None
+    top_loser_score = 0
+    losing_teams = {}
+
+    box_scores = league.box_scores(week=week_number)
+    
+    for box_score in box_scores:
+        if box_score.home_score < box_score.away_score:
+            losing_teams[box_score.home_team] = box_score.home_score
+        else:
+            losing_teams[box_score.away_team] = box_score.away_score
+
+    top_loser = max(losing_teams, key=losing_teams.get)
+    top_loser_score = losing_teams[top_loser]
+
+    if top_loser:
+        return {
+            "top_loser" : top_loser.team_name,
+            "top_loser_score" : top_loser_score
+        }
+    else:
+        return None
+    
 
 # Returns team that wins with the bigest points of margin of victory for week 10
 def week10_weekly(league):
-    week_number = 1 # change this to 10
+    week_number = 10 # change this to 10
     winning_team = None
     winning_team_score = 0
     losing_team = None
@@ -60,7 +83,7 @@ def week10_weekly(league):
 
 # Returns team closest to their projected point total (over OR under) for week 9
 def week9_weekly(league):
-    week_number = 1 # change this to 9
+    week_number = 9 # change this to 9
     top_team = None
     difference = 500
     actual_score = 0
@@ -93,7 +116,7 @@ def week9_weekly(league):
 
 # Returns team with highest scoring player on the bench for week 8
 def week8_weekly(league):
-    week_number = 1 # change this to 8
+    week_number = 8 # change this to 8
     top_team = None
     top_player = None
     top_player_points = 0
@@ -123,7 +146,7 @@ def week8_weekly(league):
 
 # Returns team with the most offensive touchdowns scored with their starters for week 7
 def week7_weekly(league):
-    week_number = 1 #change this to 7
+    week_number = 7 #change this to 7
     top_team = None
     top_team_tds = 0
 
@@ -135,41 +158,31 @@ def week7_weekly(league):
     team_dict = {}
     for box_score in box_scores:
         
-        # Reset total_tds_home and total_tds_away to 0 to accumulate tds of each team
         total_tds_home = 0
         total_tds_away = 0
 
-        # Process home team lineup
         for player in box_score.home_lineup:
             if player.slot_position != "D/ST" and player.slot_position != "BE":
-                # Initialize rush_tds, receiving_tds, and passing_tds to 0
                 rush_tds = player.stats[week_number]['breakdown'].get('rushingTouchdowns', 0)
                 receiving_tds = player.stats[week_number]['breakdown'].get('receivingTouchdowns', 0)
                 passing_tds = player.stats[week_number]['breakdown'].get('passingTouchdowns', 0)
 
-                # Accumulate total touchdowns for the home team
                 total_tds_home += rush_tds + receiving_tds + passing_tds
 
-        # Initialize home team in the dictionary if not present
         if box_score.home_team not in team_dict:
             team_dict[box_score.home_team] = 0
-        # Update total touchdowns for the home team
         team_dict[box_score.home_team] += total_tds_home
 
-        # Process away team lineup
         for player in box_score.away_lineup:
             if player.slot_position != "D/ST" and player.slot_position != "BE":
                 rush_tds = player.stats[week_number]['breakdown'].get('rushingTouchdowns', 0)
                 receiving_tds = player.stats[week_number]['breakdown'].get('receivingTouchdowns', 0)
                 passing_tds = player.stats[week_number]['breakdown'].get('passingTouchdowns', 0)
 
-                # Accumulate total touchdowns for the away team
                 total_tds_away += rush_tds + receiving_tds + passing_tds
 
-        # Initialize away team in the dictionary if not present
         if box_score.away_team not in team_dict:
             team_dict[box_score.away_team] = 0
-        # Update total touchdowns for the away team
         team_dict[box_score.away_team] += total_tds_away
 
 
@@ -187,7 +200,7 @@ def week7_weekly(league):
 
 # Returns team with most points over their weekly projection with their starters for week 6
 def week6_weekly(league):
-    week_number = 1 #change this to 6
+    week_number = 6 #change this to 6
     top_team = None
     total_points_projected = 0
     total_points_actual = 0
@@ -548,9 +561,12 @@ def webhook():
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly11' == message:
         fantasy_data = week11_weekly(league)
+
+        top_loser = fantasy_data.get("top_loser")
+        top_loser_score = fantasy_data.get("top_loser_score")
         if fantasy_data:
-            response_message = f"{fantasy_data}"
-            # response_message = f"Winner of Weekly 11: Best Loser - Team that loses with the highest score: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+
+            response_message = f"Winner of Weekly 11: Best Loser - Team that loses with the highest score: \n\n{top_loser} (Lost with {top_loser_score} points)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly12' == message:
