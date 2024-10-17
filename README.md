@@ -21,7 +21,7 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
 - ✅ WEEK 9: Bulls-eye - Team closest to their projected point total (over OR under)  
 - ✅ WEEK 10: Blownout.com/rekt - Team that wins with the biggest points margin of victory  
 - ✅ WEEK 11: Best Loser - Team that loses with the highest score  
-- WEEK 12: Gotta Catch Em All - Team with the starting WR with the most receptions    
+- ✅ WEEK 12: Gotta Catch Em All - Team with the starting WR with the most receptions    
 - WEEK 13: Blackjack - Team with a starter closest to 21 points without going over  
 - WEEK 14: Photo Finish – Team that beats its opponent by the smallest margin of victory  
 
