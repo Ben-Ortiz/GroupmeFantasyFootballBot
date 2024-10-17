@@ -16,7 +16,7 @@ def week13_weekly(league):
 
 # Returns team with the starting WR with the most receptions for week 12
 def week12_weekly(league):
-    week_number = 1
+    week_number = 12
     top_teams = {}
     top_wrs = []
     all_wrs = {}
@@ -149,7 +149,7 @@ def week9_weekly(league):
 
 # Returns team with highest scoring player on the bench for week 8
 def week8_weekly(league):
-    week_number = 1 # change this to 8
+    week_number = 8 # change this to 8
     top_team = None
     top_player = None
     top_player_points = 0
