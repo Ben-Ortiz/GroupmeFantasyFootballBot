@@ -757,8 +757,7 @@ def webhook():
     send_message(response_message)
     return jsonify({"status": "OK", "response": response_message}), 200
 
-  
-  
+
 def send_message(msg):
     base_url = 'https://api.groupme.com/v3/bots/post'
     data = {
