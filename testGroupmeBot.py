@@ -6,7 +6,31 @@ import config
 app = Flask(__name__)
 
 def survival_bowl(league):
-    pass
+    
+    current_week = league.nfl_week
+    all_teams = league.teams
+    lost_teams = []
+    all_team_names_and_scores = {}
+    for i in range(1, current_week):
+        bottom_team = None
+        all_team_names_and_scores.clear()
+        box_scores = league.box_scores(week=i)
+        for box_score in box_scores:
+            home_team = box_score.home_team
+            away_team = box_score.away_team
+            if isinstance(home_team, int) or isinstance(away_team, int):
+                continue
+            else:
+                all_team_names_and_scores[box_score.home_team] = box_score.home_score
+                all_team_names_and_scores[box_score.away_team] = box_score.away_score
+        
+        bottom_team = min(all_team_names_and_scores, key=all_team_names_and_scores.get)
+        lost_teams.append(bottom_team)
+        all_teams.remove(bottom_team)
+
+
+
+    return all_teams
 
 # Returns team that beats its opponent by the smallest margin of victory for week 14
 def week14_weekly(league):
