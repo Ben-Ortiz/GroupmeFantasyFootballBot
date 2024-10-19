@@ -622,7 +622,14 @@ def webhook():
             return "OK", 200
 
     if '!hello' == message:
-        response_message = "Hi there! How can I assist you today?"
+        response_message = "hello there"
+    elif '!bot' == message:
+        formatted_response = (
+                f"Hi there! I'm Roger Goodell bot!\n\n"
+                f"Use command !weekly1 to find out who won the week 1 weekly, !weekly2 to find out who won the week 2 weekly and so on.\n\n"
+                f"Use command !survival to find out who is currently in the survival bowl."
+            )
+        response_message = formatted_response
     elif '!fantasy' == message:
         fantasy_data = fetch_fantasy_data()
         if fantasy_data:
