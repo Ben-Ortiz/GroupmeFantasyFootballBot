@@ -25,6 +25,10 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
 - ✅ WEEK 13: Blackjack - Team with a starter closest to 21 points without going over  
 - ✅ WEEK 14: Photo Finish – Team that beats its opponent by the smallest margin of victory  
 
+### Other things to implement
+- Survival Bowl
+    - Every week, team with lowest score is eliminated from list of all teams. Last team standing wins.
+
 # What to do when new season starts
 - Will add this in future but most likely have to edit config file. create a new bot, get new bot id, enter new league id, and enter new year
 
