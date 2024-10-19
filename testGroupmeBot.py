@@ -792,8 +792,8 @@ def webhook():
             dead_teams = fantasy_data.get("dead_teams")
             current_week = league.nfl_week
 
-            formatted_surviving_teams = "\n".join(surviving_teams)
-            formatted_dead_teams = "\n".join(f"{team}: ({score} points)" for team, score in dead_teams.items())
+            formatted_surviving_teams = "\n".join(f" - {team}" for team in surviving_teams)
+            formatted_dead_teams = "\n".join(f" - {team}: ({score} points)" for team, score in dead_teams.items())
             formatted_response = (
                 f"Survival Bowl\n"
                 f"Lowest score each week is eliminated. Last team standing wins.\n"
@@ -801,7 +801,7 @@ def webhook():
                 f"Surviving teams:\n{formatted_surviving_teams}\n\n"
                 f"Eliminated teams:\n{formatted_dead_teams}"
             )
-            # response_message = f"Fantasy league data: {fantasy_data}"
+
             response_message = formatted_response
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
