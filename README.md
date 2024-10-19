@@ -22,8 +22,8 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
 - ✅ WEEK 10: Blownout.com/rekt - Team that wins with the biggest points margin of victory  
 - ✅ WEEK 11: Best Loser - Team that loses with the highest score  
 - ✅ WEEK 12: Gotta Catch Em All - Team with the starting WR with the most receptions    
-- WEEK 13: Blackjack - Team with a starter closest to 21 points without going over  
-- WEEK 14: Photo Finish – Team that beats its opponent by the smallest margin of victory  
+- ✅ WEEK 13: Blackjack - Team with a starter closest to 21 points without going over  
+- ✅ WEEK 14: Photo Finish – Team that beats its opponent by the smallest margin of victory  
 
 # How to test
 1. Git clone into your machine  
@@ -67,5 +67,5 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
 * Functionality:   
     - ✅ Add weekly announcements based on that week's weekly. Example: week 1, team with starter with most points, and announce that in groupchat when giving a command in the format of !weekly#, where # is the week number. Example: !weekly2.  
     - Add weekly annoucnement based on survival bowl. Example: every week, eliminate team from list of who has the least amount of points. End of season only 1 team remains.  
-    - Put logic for ties (2 teams have same score and how to resolve those ties)  
-    - More error handling
+    - Put logic for ties (2 teams have same score and how to resolve those ties) for all weeks.  
+    - Consistent error checking for all weeks.

@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-# NFL Import
 from espn_api.football import League
 import requests
 import config
@@ -8,11 +7,75 @@ app = Flask(__name__)
 
 # Returns team that beats its opponent by the smallest margin of victory for week 14
 def week14_weekly(league):
-    pass
+    week_number = 14
+    winning_team = None
+    winning_team_score = 0
+    losing_team = None
+    losing_team_score = 0
+    min_difference = 500
+
+    box_scores = league.box_scores(week=week_number)
+    for box_score in box_scores:
+        if box_score.home_score > box_score.away_score:
+            difference_temp = abs(box_score.home_score - box_score.away_score)
+            if difference_temp < min_difference:
+                min_difference = difference_temp
+                winning_team = box_score.home_team
+                winning_team_score = box_score.home_score
+                losing_team = box_score.away_team
+                losing_team_score = box_score.away_score
+        else:
+            difference_temp = abs(box_score.home_score - box_score.away_score)
+            if difference_temp < min_difference:
+                min_difference = difference_temp
+                winning_team = box_score.away_team
+                winning_team_score = box_score.away_score
+                losing_team = box_score.home_team
+                losing_team_score = box_score.home_score
+    
+
+    return {
+        "winning_team" : winning_team.team_name,
+        "winning_team_score": winning_team_score,
+        "losing_team" : losing_team.team_name,
+        "losing_team_score": losing_team_score,
+        "difference": min_difference
+    }
+
 
 # Returns team with a starter closest to 21 points without going over for week 13
+# needs to be fixed in case of 2 players that are tied
 def week13_weekly(league):
-    pass
+    week_number = 13
+    top_player = None
+    top_player_points = 0
+    top_team = None
+    blackjack = 21
+    difference_target = 500
+
+    box_scores = league.box_scores(week = week_number)
+
+    for box_score in box_scores:
+        for player in box_score.home_lineup + box_score.away_lineup:
+            if player.slot_position != "BE":
+                difference_temp = player.points - blackjack
+                if difference_temp < difference_target and difference_temp > -1:
+                    difference_target = difference_temp
+                    top_player = player
+                    top_player_points = player.points
+                    if top_player in box_score.home_lineup:
+                        top_team = box_score.home_team.team_name
+                    else:
+                        top_team = box_score.away_team.team_name
+    if top_player:
+        return {
+            "top_player": top_player.name,
+            "top_player_points": top_player_points,
+            "top_team": top_team
+        }
+    else:
+        return None
+
 
 # Returns team with the starting WR with the most receptions for week 12
 def week12_weekly(league):
@@ -30,8 +93,8 @@ def week12_weekly(league):
                 receptions = player.stats[week_number]['breakdown'].get('receivingReceptions', 0)
                 all_wrs[player]  = receptions
     
-    # max_receptions = max(all_wrs.values())
-    max_receptions = 7
+    max_receptions = max(all_wrs.values())
+    # max_receptions = 7
     top_wrs = [element for element, receptions in all_wrs.items() if receptions == max_receptions]
 
     # this to account for teams who have players with the same top receptions
@@ -54,7 +117,7 @@ def week12_weekly(league):
         return None
 # Returns team that loses with the highest score for week 11
 def week11_weekly(league):
-    week_number = 11 # change this to 11
+    week_number = 11 
     top_loser = None
     top_loser_score = 0
     losing_teams = {}
@@ -81,7 +144,7 @@ def week11_weekly(league):
 
 # Returns team that wins with the bigest points of margin of victory for week 10
 def week10_weekly(league):
-    week_number = 10 # change this to 10
+    week_number = 10 
     winning_team = None
     winning_team_score = 0
     losing_team = None
@@ -116,7 +179,7 @@ def week10_weekly(league):
 
 # Returns team closest to their projected point total (over OR under) for week 9
 def week9_weekly(league):
-    week_number = 9 # change this to 9
+    week_number = 9 
     top_team = None
     difference = 500
     actual_score = 0
@@ -149,7 +212,7 @@ def week9_weekly(league):
 
 # Returns team with highest scoring player on the bench for week 8
 def week8_weekly(league):
-    week_number = 8 # change this to 8
+    week_number = 8 
     top_team = None
     top_player = None
     top_player_points = 0
@@ -179,7 +242,7 @@ def week8_weekly(league):
 
 # Returns team with the most offensive touchdowns scored with their starters for week 7
 def week7_weekly(league):
-    week_number = 7 #change this to 7
+    week_number = 7 
     top_team = None
     top_team_tds = 0
 
@@ -233,7 +296,7 @@ def week7_weekly(league):
 
 # Returns team with most points over their weekly projection with their starters for week 6
 def week6_weekly(league):
-    week_number = 6 #change this to 6
+    week_number = 6 
     top_team = None
     total_points_projected = 0
     total_points_actual = 0
@@ -654,15 +717,23 @@ def webhook():
     elif '!weekly13' == message:
         fantasy_data = week13_weekly(league)
         if fantasy_data:
-            response_message = f"{fantasy_data}"
-            # response_message = f"Winner of Weekly 13: Blackjack - Team with a starter closest to 21 points without going over: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+            top_player = fantasy_data.get("top_player")
+            top_player_points = fantasy_data.get("top_player_points")
+            top_team = fantasy_data.get("top_team")
+
+            response_message = f"Winner of Weekly 13: Blackjack - Team with a starter closest to 21 points without going over: \n\n{top_team} ({top_player} {top_player_points} points)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly14' == message:
         fantasy_data = week14_weekly(league)
         if fantasy_data:
-            response_message = f"{fantasy_data}"
-            # response_message = f"Winner of Weekly 14: Photo Finish - Team that beats its opponent by the smallest margin of victory: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+            winning_team = fantasy_data.get("winning_team")
+            winning_team_score = fantasy_data.get("winning_team_score")
+            losing_team = fantasy_data.get("losing_team")
+            losing_team_score = fantasy_data.get("losing_team_score")
+            difference = fantasy_data.get("difference")
+
+            response_message = f"Winner of Weekly 14: Photo Finish - Team that beats its opponent by the smallest margin of victory: \n\n{winning_team} ({winning_team} {winning_team_score} points vs {losing_team} {losing_team_score} points, {difference} difference)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     else:
