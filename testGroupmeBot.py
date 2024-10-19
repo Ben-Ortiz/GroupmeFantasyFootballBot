@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 def survival_bowl(league):
     
-    current_week = league.nfl_week
+    current_week = league.nfl_week + 1
     all_teams = league.teams
     lost_teams = []
     all_team_names_and_scores = {}
@@ -30,7 +30,10 @@ def survival_bowl(league):
 
 
 
-    return all_teams
+    return {
+        "all_teams": all_teams,
+        "lost_teams": lost_teams
+    }
 
 # Returns team that beats its opponent by the smallest margin of victory for week 14
 def week14_weekly(league):
@@ -783,7 +786,7 @@ def webhook():
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     else:
-        response_message = "what you say bruh?"
+        response_message = "bruhhhhhhhh"
     
     send_message(response_message)
     return jsonify({"status": "OK", "response": response_message}), 200
