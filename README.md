@@ -1,5 +1,5 @@
 # GroupMe Fantasy Football bot
-This is a bot built with python and flask, utilizing [cwebdt94's Python ESPN API](https://github.com/cwendt94/espn-api), to send messages to a group chat in Groupme about Fantasy Football related data, deployed on [Glitch](https://glitch.com)
+This is a bot built with python and flask, utilizing [cwebdt94's Python ESPN API](https://github.com/cwendt94/espn-api) and the ESPN Gamelog API endpoint listed in [nntrn's repo](https://github.com/nntrn/espn-wiki), to send messages to a group chat in Groupme about Fantasy Football related data, deployed on [Glitch](https://glitch.com)
 
 The bot's purpose is to respond with the winning team based on the "weekly" if you message the GroupMe chat where the bots lives with the command "!weekly#, where # is the week number.  
   
@@ -11,7 +11,7 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
 
 ### The Weeklys are:  
 - ✅ WEEK 1: Get Schwifty - Team with the single highest scoring starter   
-- WEEK 2: Chicks Dig The Long Ball - Team with the starting QB with the longest pass   
+- ✅ WEEK 2: Chicks Dig The Long Ball - Team with the starting QB with the longest pass   
 - ✅ WEEK 3: Bench Warmer - Team with the most total points from their bench   
 - ✅ WEEK 4: Run Forrest Run! - Team with the starting RB with the most rushing yards  
 - ✅ WEEK 5: Dirty 30 - Team with any starter closest to 30 points (over OR under)  

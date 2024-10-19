@@ -375,24 +375,85 @@ def week3_weekly(league):
 # this doesn't work as intended
 # Returns team with starter QB who threw the longest pass (touchdown or not) for week 2
 def week2_weekly(league):
-    week_number = 1 # change this to 2
+    """
+    Use other ESPN endpoints to get this
+    
+    first get all active qbs week 2
+    get all their ATHLETE_IDs
+    
+    then go through this API
+    site.web.api.espn.com/apis/common/v3/sports/football/nfl/athletes/{ATHLETE_ID}/gamelog
+
+    grab all 2nd to last event stats
+    grab the index 7 stat, which is the LNG pass of week 2 for that player (which would be qbs since I grabbed all IDS of only QBs)
+    # Access the second-to-last event
+    second_to_last_event = data["seasonTypes"][0]["categories"][0]["events"][-2]
+
+    # Now, if you want to access a specific stat (like the 8th stat in that event)
+    stat_value = second_to_last_event["stats"][7]
+
+    now return largest number, and return player id
+    use player id to get player name
+    return player name
+    return largest number (longest pass)
+    return team who has that player
+    """
+
+    week_number = 2 # change this to 2
     longest_pass = -1
     top_qb = None
     top_qb_team = None
-    stats = []
-    dummy_response = 'this doesn\'t work right now, try another command' 
+    qb_and_longest_pass = {}
+
+    # URL that gets the game logs of each player based on player_Id
+    base_url = "https://site.web.api.espn.com/apis/common/v3/sports/football/nfl/athletes/{}/gamelog"
 
     box_scores = league.box_scores(week=week_number)
     for box_score in box_scores:
         for player in box_score.home_lineup + box_score.away_lineup:
-            # Check if the player is a QB
-            if player.position == 'QB':
-                # Access player's stats for passing data
-                stats.append(player)
-                stats.append(player.stats)
+            if player.slot_position == "QB" and player.slot_position != "BE":
+                qb_id = player.playerId
+                url = base_url.format(qb_id)
+                response = requests.get(url)
+                if response.status_code == 200:
+                    # Parse the JSON data
+                    data = response.json()
+                    # Access the second-to-last event, which means week 2 of regular season based on player_ID
+                    week2_game = data["seasonTypes"][0]["categories"][0]["events"][-2]
+
+                    # specific stat, which is longest pass based on player_ID
+                    longest_pass_value = week2_game["stats"][7]
+
+                    # add to dict qb player name and their longest pass
+                    qb_and_longest_pass[player] = longest_pass_value
+
+                else:
+                    # Handle errors (e.g., if the athlete ID is not found or there's a server issue)
+                    return f"Failed to retrieve data for athlete ID {qb_id}. Status code: {response.status_code}"
+
+    # get top qb with the longest pass    
+    top_qb = max(qb_and_longest_pass, key=qb_and_longest_pass.get)
+
+    # get the value of the longest pass
+    longest_pass = qb_and_longest_pass[top_qb]
+
+    # get the team that has the qb with the longest pass
+    for box_score in box_scores:
+        for player in box_score.home_lineup + box_score.away_lineup:
+            if player.slot_position == "QB" and player.slot_position != "BE":
+                if top_qb in box_score.home_lineup:
+                    top_qb_team = box_score.home_team.team_name
+                else:
+                    top_qb_team = box_score.away_team.team_name
+
+
 
     # Return the top QB information
-    return dummy_response
+    return {
+        "top_qb": top_qb.name,
+        "longest_pass": longest_pass,
+        "team": top_qb_team
+    }
 
 
 # Returns team with starter who scored the most points for week 1
@@ -495,7 +556,11 @@ def webhook():
         fantasy_data = week2_weekly(league)
         # player_name = fantasy_data.get('qb_name')
         if fantasy_data:
-            response_message = f"{fantasy_data}." 
+            top_qb = fantasy_data.get("top_qb")
+            longest_pass = fantasy_data.get("longest_pass")
+            player_team = fantasy_data.get("team")
+
+            response_message = f"Winner of Weekly 2: Chicks Dig The Long Ball - Team with the starting QB with the longest pass: \n\n{player_team} ({top_qb} {longest_pass} yard pass)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly3' == message:
@@ -633,12 +698,12 @@ def webhook():
   
   
 def send_message(msg):
-    url = 'https://api.groupme.com/v3/bots/post'
+    base_url = 'https://api.groupme.com/v3/bots/post'
     data = {
         'bot_id': config.BOT_ID,
         'text': msg
     }
-    requests.post(url, json=data)
+    requests.post(base_url, json=data)
 
 if __name__ == '__main__':
     app.run(debug=True)
