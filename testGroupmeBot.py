@@ -375,30 +375,6 @@ def week3_weekly(league):
 # this doesn't work as intended
 # Returns team with starter QB who threw the longest pass (touchdown or not) for week 2
 def week2_weekly(league):
-    """
-    Use other ESPN endpoints to get this
-    
-    first get all active qbs week 2
-    get all their ATHLETE_IDs
-    
-    then go through this API
-    site.web.api.espn.com/apis/common/v3/sports/football/nfl/athletes/{ATHLETE_ID}/gamelog
-
-    grab all 2nd to last event stats
-    grab the index 7 stat, which is the LNG pass of week 2 for that player (which would be qbs since I grabbed all IDS of only QBs)
-    # Access the second-to-last event
-    second_to_last_event = data["seasonTypes"][0]["categories"][0]["events"][-2]
-
-    # Now, if you want to access a specific stat (like the 8th stat in that event)
-    stat_value = second_to_last_event["stats"][7]
-
-    now return largest number, and return player id
-    use player id to get player name
-    return player name
-    return largest number (longest pass)
-    return team who has that player
-    """
-
     week_number = 2 # change this to 2
     longest_pass = -1
     top_qb = None
