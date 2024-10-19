@@ -69,3 +69,4 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
     - Add weekly annoucnement based on survival bowl. Example: every week, eliminate team from list of who has the least amount of points. End of season only 1 team remains.  
     - Put logic for ties (2 teams have same score and how to resolve those ties) for all weeks.  
     - Consistent error checking for all weeks.
+    - Maybe Defenses are not considered players and should not be counted.
