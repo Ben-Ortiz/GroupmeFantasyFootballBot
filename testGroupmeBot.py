@@ -5,6 +5,9 @@ import config
 
 app = Flask(__name__)
 
+def survival_bowl(league):
+    pass
+
 # Returns team that beats its opponent by the smallest margin of victory for week 14
 def week14_weekly(league):
     week_number = 14
@@ -603,10 +606,8 @@ def webhook():
             response_message = f"Winner of Weekly 1: Get Schwifty - Team with the single highest scoring starter: \n\n{player_team} ({player_name} {player_points})" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
-    # weekly2 does not work
     elif '!weekly2' == message:
         fantasy_data = week2_weekly(league)
-        # player_name = fantasy_data.get('qb_name')
         if fantasy_data:
             top_qb = fantasy_data.get("top_qb")
             longest_pass = fantasy_data.get("longest_pass")
@@ -749,6 +750,12 @@ def webhook():
             difference = fantasy_data.get("difference")
 
             response_message = f"Winner of Weekly 14: Photo Finish - Team that beats its opponent by the smallest margin of victory: \n\n{winning_team} ({winning_team} {winning_team_score} points vs {losing_team} {losing_team_score} points, {difference:.2f} difference)" 
+        else:
+            response_message = "Sorry, I couldn't fetch the fantasy data."
+    elif '!survival' == message:
+        fantasy_data = survival_bowl(league)
+        if fantasy_data:
+            response_message = f"Fantasy league data: {fantasy_data}"
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     else:
