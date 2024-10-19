@@ -7,9 +7,10 @@ app = Flask(__name__)
 
 def survival_bowl(league):
     
-    current_week = league.nfl_week + 1
+    current_week = league.nfl_week
     all_teams = league.teams
-    lost_teams = []
+    surviving_teams = []
+    dead_teams_dict = {}
     all_team_names_and_scores = {}
     for i in range(1, current_week):
         bottom_team = None
@@ -18,22 +19,27 @@ def survival_bowl(league):
         for box_score in box_scores:
             home_team = box_score.home_team
             away_team = box_score.away_team
-            if isinstance(home_team, int) or isinstance(away_team, int):
-                continue
-            else:
-                all_team_names_and_scores[box_score.home_team] = box_score.home_score
-                all_team_names_and_scores[box_score.away_team] = box_score.away_score
-        
-        bottom_team = min(all_team_names_and_scores, key=all_team_names_and_scores.get)
-        lost_teams.append(bottom_team)
+            all_team_names_and_scores[box_score.home_team] = box_score.home_score
+            all_team_names_and_scores[box_score.away_team] = box_score.away_score
+                
+        # get rid of all teams where the key is an int (for some reason, teams eliminated they turn into ints, idk why)
+        filtered_all_team_names_and_scores = {key: value for key, value in all_team_names_and_scores.items() if not isinstance(key, int)}
+        bottom_team = min(filtered_all_team_names_and_scores, key=filtered_all_team_names_and_scores.get)
+        dead_teams_dict
+        dead_teams_score = filtered_all_team_names_and_scores[bottom_team]
+        dead_teams_dict[bottom_team.team_name] = dead_teams_score
         all_teams.remove(bottom_team)
 
-
-
-    return {
-        "all_teams": all_teams,
-        "lost_teams": lost_teams
-    }
+    for team in all_teams:
+        surviving_teams.append(team.team_name)
+    
+    if all_teams:
+        return {
+            "surviving_teams": surviving_teams,
+            "dead_teams": dead_teams_dict
+        }
+    else:
+        return None
 
 # Returns team that beats its opponent by the smallest margin of victory for week 14
 def week14_weekly(league):
@@ -782,7 +788,21 @@ def webhook():
     elif '!survival' == message:
         fantasy_data = survival_bowl(league)
         if fantasy_data:
-            response_message = f"Fantasy league data: {fantasy_data}"
+            surviving_teams = fantasy_data.get("surviving_teams")
+            dead_teams = fantasy_data.get("dead_teams")
+            current_week = league.nfl_week
+
+            formatted_surviving_teams = "\n".join(surviving_teams)
+            formatted_dead_teams = "\n".join(f"{team}: ({score} points)" for team, score in dead_teams.items())
+            formatted_response = (
+                f"Survival Bowl\n"
+                f"Lowest score each week is eliminated. Last team standing wins.\n"
+                f"Week {current_week}\n\n"
+                f"Surviving teams:\n{formatted_surviving_teams}\n\n"
+                f"Eliminated teams:\n{formatted_dead_teams}"
+            )
+            # response_message = f"Fantasy league data: {fantasy_data}"
+            response_message = formatted_response
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     else:
