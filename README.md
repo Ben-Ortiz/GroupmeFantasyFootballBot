@@ -28,7 +28,7 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
 # How to test
 1. Git clone into your machine  
 2. Create a config.py in the same location as testGroupmeBot.py, and add your bot id, espn league id, and espn season year  
-    - To get your bot id, login to the GroupMe Developers site, click on Bots, and you should find your Bot Id.
+    - To get your bot id, login to the [GroupMe Developers site](https://dev.groupme.com/), click on Bots, and you should find your Bot Id.
     - To get your espn league id, go to your espn fantasy page, and you should find it in the URL in this form:
         - https://fantasy.espn.com/football/team?leagueId=12345678&teamId=1
     - Format it in the config.py file in the form:
