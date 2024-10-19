@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # Returns team that beats its opponent by the smallest margin of victory for week 14
 def week14_weekly(league):
-    week_number = 1
+    week_number = 14
     winning_team = None
     winning_team_score = 0
     losing_team = None
@@ -46,7 +46,7 @@ def week14_weekly(league):
 # Returns team with a starter closest to 21 points without going over for week 13
 # needs to be fixed in case of 2 players that are tied ,
 def week13_weekly(league):
-    week_number = 1
+    week_number = 13
     top_player = None
     top_player_points = 0
     top_team = None
@@ -79,7 +79,7 @@ def week13_weekly(league):
 
 # Returns team with the starting WR with the most receptions for week 12
 def week12_weekly(league):
-    week_number = 1
+    week_number = 12
     top_teams = {}
     top_wrs = []
     all_wrs = {}
@@ -117,7 +117,7 @@ def week12_weekly(league):
         return None
 # Returns team that loses with the highest score for week 11
 def week11_weekly(league):
-    week_number = 1
+    week_number = 11
     top_loser = None
     top_loser_score = 0
     losing_teams = {}
@@ -157,7 +157,7 @@ def week11_weekly(league):
 
 # Returns team that wins with the bigest points of margin of victory for week 10
 def week10_weekly(league):
-    week_number = 1
+    week_number = 10
     winning_team = None
     winning_team_score = 0
     losing_team = None
@@ -192,7 +192,7 @@ def week10_weekly(league):
 
 # Returns team closest to their projected point total (over OR under) for week 9
 def week9_weekly(league):
-    week_number = 1
+    week_number = 9
     top_team = None
     difference = 500
     actual_score = 0
@@ -225,7 +225,7 @@ def week9_weekly(league):
 
 # Returns team with highest scoring player on the bench for week 8
 def week8_weekly(league):
-    week_number = 1
+    week_number = 8
     top_team = None
     top_player = None
     top_player_points = 0
@@ -255,7 +255,7 @@ def week8_weekly(league):
 
 # Returns team with the most offensive touchdowns scored with their starters for week 7
 def week7_weekly(league):
-    week_number = 1
+    week_number = 7
     top_team = None
     top_team_tds = 0
 
