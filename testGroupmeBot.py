@@ -799,7 +799,7 @@ def webhook():
         if fantasy_data:
             surviving_teams = fantasy_data.get("surviving_teams")
             dead_teams = fantasy_data.get("dead_teams")
-            current_week = league.nfl_week
+            current_week = league.nfl_week - 1
 
             formatted_surviving_teams = "\n".join(f" - {team}" for team in surviving_teams)
             formatted_dead_teams = "\n".join(f" - {team}: ({score} points)" for team, score in dead_teams.items())
