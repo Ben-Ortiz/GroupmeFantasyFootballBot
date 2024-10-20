@@ -700,7 +700,7 @@ def webhook():
             team__points_projected_formatted = f"{team__points_projected:.2f}"
             team_points_actual_formatted = f"{team_points_actual:.2f}"
             difference_formatted = f"{difference:.2f}"
-            response_message = f"Winner of Weekly 6: Over Achiever - Team with most points over their weekly projections with their starters: \n\n{clean_team_name} (points projected: {team__points_projected_formatted} points, points actual: {team_points_actual_formatted} points, {difference_formatted} difference)" 
+            response_message = f"Winner of Weekly 6: Over Achiever - Team with most points over their weekly projections with their starters: \n\n{clean_team_name} (points projected: {team__points_projected_formatted} points, points actual: {team_points_actual_formatted} points, difference: {difference_formatted} points)" 
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly7' == message:
