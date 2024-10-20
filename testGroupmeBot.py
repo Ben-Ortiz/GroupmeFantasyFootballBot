@@ -6,7 +6,6 @@ import config
 app = Flask(__name__)
 
 def survival_bowl(league):
-    
     current_week = league.nfl_week
     all_teams = league.teams
     surviving_teams = []
