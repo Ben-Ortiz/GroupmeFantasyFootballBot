@@ -484,7 +484,6 @@ def week3_weekly(league):
     else:
         return None
 
-# this doesn't work as intended
 # Returns team with starter QB who threw the longest pass (touchdown or not) for week 2
 def week2_weekly(league):
     week_number = 2 # change this to 2
