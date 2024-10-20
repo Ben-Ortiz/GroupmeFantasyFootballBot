@@ -805,8 +805,8 @@ def webhook():
             formatted_dead_teams = "\n".join(f" - {team}: ({score} points)" for team, score in dead_teams.items())
             formatted_response = (
                 f"Survival Bowl\n"
-                f"Lowest score each week is eliminated. Last team standing wins.\n"
-                f"Week {current_week}\n\n"
+                f"Lowest score each week is eliminated. Last team standing wins.\n\n"
+                f"Week {current_week}\n"
                 f"Surviving teams:\n{formatted_surviving_teams}\n\n"
                 f"Eliminated teams:\n{formatted_dead_teams}"
             )
