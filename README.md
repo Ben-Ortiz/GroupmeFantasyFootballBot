@@ -28,6 +28,12 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
 ### Other things to implement
 - ✅ Survival Bowl
     - ✅ Every week, team with lowest score is eliminated from list of all teams. Last team standing wins.
+- Playoff winners command
+    - 3 division winners at end of season (top teams of each division)  
+    - 3 wildcard winners at end of season  
+- 1st, 2nd, 3rd, place command  
+- Consolation prize command
+    - Winner of consolation ladder
 
 # What to do when new season starts
 - Will add this in future but most likely have to edit config file. create a new bot, get new bot id, enter new league id, and enter new year
