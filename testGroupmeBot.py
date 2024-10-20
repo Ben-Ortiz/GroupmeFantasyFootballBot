@@ -690,6 +690,15 @@ def webhook():
     elif '!weekly6' == message:
         fantasy_data = week6_weekly(league)
         
+        """
+        week 7 on 10/20/2024
+        """
+        nfl_week = league.nfl_week 
+        """
+        week 7 on 10/20/2024
+        """
+        current_week = league.current_week
+
         if fantasy_data:
             team_name = fantasy_data.get('team_name')
             team__points_projected = fantasy_data.get('team_points_projected')
