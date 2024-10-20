@@ -19,8 +19,8 @@ def survival_bowl(league):
         for box_score in box_scores:
             home_team = box_score.home_team
             away_team = box_score.away_team
-            all_team_names_and_scores[box_score.home_team] = box_score.home_score
-            all_team_names_and_scores[box_score.away_team] = box_score.away_score
+            all_team_names_and_scores[home_team] = box_score.home_score
+            all_team_names_and_scores[away_team] = box_score.away_score
                 
         # get rid of all teams where the key is an int (for some reason, teams eliminated they turn into ints, idk why)
         filtered_all_team_names_and_scores = {key: value for key, value in all_team_names_and_scores.items() if not isinstance(key, int)}
@@ -80,7 +80,7 @@ def week14_weekly(league):
 
 
 # Returns team with a starter closest to 21 points without going over for week 13
-# needs to be fixed in case of 2 players that are tied ,
+# needs to be fixed in case of 2 players that are tied
 def week13_weekly(league):
     week_number = 13
     top_player = None
@@ -498,6 +498,7 @@ def week2_weekly(league):
     box_scores = league.box_scores(week=week_number)
     for box_score in box_scores:
         for player in box_score.home_lineup + box_score.away_lineup:
+            # loop through all starting qbs id of each team
             if player.slot_position == "QB" and player.slot_position != "BE":
                 qb_id = player.playerId
                 url = base_url.format(qb_id)
@@ -513,6 +514,8 @@ def week2_weekly(league):
 
                     # add to dict qb player name and their longest pass
                     qb_and_longest_pass[player] = longest_pass_value
+
+                    #go to the next team in loop
 
                 else:
                     # Handle errors (e.g., if the athlete ID is not found or there's a server issue)
