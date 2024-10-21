@@ -689,8 +689,18 @@ def webhook():
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly6' == message:
         fantasy_data = week6_weekly(league)
-        
+
         """
+        plan for this, 
+        example, 
+        weekly_week = 6
+        current week = 5, this does not run
+        current_week = 6, this does not run
+        current week = 7, this does run
+        weekly_week(6) < current_week(5) false dont run
+        weekly_week(6) < current_week(6) false dont run
+        weekly_week(6) < current_week(7) true run
+        
         week 7 on 10/20/2024
         """
         nfl_week = league.nfl_week 
