@@ -575,19 +575,27 @@ def week1_weekly(league):
     else:
         return None
 
+# Returns one of the random responses from the list
+def random_response():
+    random_responses = [
+        "bruhhhhhhhh idk what means",
+        "Sheeeeeeeesh",
+        "Skibidi toilet or something like that",
+        "Ayoooooo",
+        "That's wild",
+        "NFL is rigged",
+        "Pause",
+        "I ain't readin all that",
+        "No Fun League strikes again"
+        ]
+    return random.choice(random_responses)
+
 # this method is for testing
 def fetch_fantasy_data():
     try:
         # Initialize the league object
         league = League(league_id=config.ESPN_LEAGUE_ID, year=config.ESPN_SEASON_YEAR)
-        
-        # Extract relevant team data and format it into a JSON-serializable formatd
         team_data = []
-        # for team in league.teams:
-        #     team_info = {
-        #         'team_name': team.team_name
-        #     }
-        #     team_data.append(team_info)
         
         top_rushing_yards = 0
         top_player = None
@@ -929,18 +937,7 @@ def webhook():
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     else:
-        random_responses = [
-        "bruhhhhhhhh idk what means",
-        "Sheeeeeeeesh",
-        "Skibidi toilet or something like that",
-        "Ayoooooo",
-        "That's wild",
-        "NFL is rigged",
-        "Pause",
-        "I ain't readin all that",
-        "No Fun League strikes again"
-        ]
-        response_message = random.choice(random_responses)
+        response_message = random_response()
     
 
     send_message(response_message)
