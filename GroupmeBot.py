@@ -12,7 +12,8 @@ random_responses = [
         "Sheeeeeeeesh",
         "Skibidi toilet or something like that",
         "Ayoooooo",
-        "That's wild"
+        "That's wild",
+        "NFL is rigged"
         ]
 
 def survival_bowl(league):
