@@ -75,7 +75,8 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
 - Fork this repo
 - Go to [Glitch](https://glitch.com/)
 - Log in or make an account for Glitch
-- Copy the HTTPS Clone link of the Forked repo. Example: https://github.com/John-Doe/GroupmeFantasyFootballBot.git
+- Copy the HTTPS Clone link of the Forked repo. 
+    - Example: https://github.com/John-Doe/GroupmeFantasyFootballBot.git
 - Click New Project -> import from Github, paste the link in the popup
 - Make the config.py file with the information:
     - BOT_ID = 'Your bot ID'
