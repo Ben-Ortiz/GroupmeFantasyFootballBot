@@ -619,6 +619,17 @@ def webhook():
     # This is the message from the chat
     message = data['text'].lower()
     
+    if 'bad bot' in message:
+        response_message = "Bruh I’m just trying to help!"
+        send_message(response_message) 
+        return jsonify({"status": "OK", "response": response_message}), 200
+
+    if 'good bot' in message:
+        response_message = "Hell yea bruh!"
+        send_message(response_message) 
+        return jsonify({"status": "OK", "response": response_message}), 200
+
+
     if not message.startswith('!'):
             return "OK", 200
 
@@ -917,7 +928,7 @@ def webhook():
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     else:
-        response_message = "bruhhhhhhhh"
+        response_message = "bruhhhhhhhh idk what means"
     
 
     send_message(response_message)
