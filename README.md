@@ -10,7 +10,7 @@ An example response would be "Winner of Weekly 1: Team Red - Team with the singl
 So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scored 35 fantasy points.
 
 ### List of bot Commands
-- !weekly# where # is the week number
+- !weekly<week number\> where <week number\> is the week number
     - Bot responds with the weekly of that week.
         - Example: !weekly1
 - !survival
