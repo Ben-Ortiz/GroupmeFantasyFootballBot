@@ -9,6 +9,21 @@ To get a response from the bot, you would type for example, "!weekly1" to find o
 An example response would be "Winner of Weekly 1: Team Red - Team with the single highest scoring starter: Team Red (Patrick Mahomes 35 points)  
 So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scored 35 fantasy points.
 
+### List of bot Commands
+- !weekly# where # is the week number
+    - Bot responds with the weekly of that week.
+        - Example: !weekly1
+- !survival
+    - Bot responds with the list of surviving and eliminated teams for the surival bowl
+- !hello
+    - Bot responds by introducing itself
+- ![anything else]
+    - Bot responds with a random response
+- "bad bot"
+    - Bot responds negatively
+- "good bot"
+    - Bot responds positively
+
 ### The Weeklys are:  
 - ✅ WEEK 1: Get Schwifty - Team with the single highest scoring starter   
 - ✅ WEEK 2: Chicks Dig The Long Ball - Team with the starting QB with the longest pass   
