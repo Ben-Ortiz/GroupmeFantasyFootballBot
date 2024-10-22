@@ -7,15 +7,6 @@ import random
 
 app = Flask(__name__)
 
-random_responses = [
-        "bruhhhhhhhh idk what means",
-        "Sheeeeeeeesh",
-        "Skibidi toilet or something like that",
-        "Ayoooooo",
-        "That's wild",
-        "NFL is rigged"
-        ]
-
 def survival_bowl(league):
     current_week = league.nfl_week
     all_teams = league.teams
@@ -938,6 +929,16 @@ def webhook():
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     else:
+        random_responses = [
+        "bruhhhhhhhh idk what means",
+        "Sheeeeeeeesh",
+        "Skibidi toilet or something like that",
+        "Ayoooooo",
+        "That's wild",
+        "NFL is rigged",
+        "Pause",
+        "I ain't readin all that"
+        ]
         response_message = random.choice(random_responses)
     
 
