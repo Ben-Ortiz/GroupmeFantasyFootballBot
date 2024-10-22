@@ -937,7 +937,8 @@ def webhook():
         "That's wild",
         "NFL is rigged",
         "Pause",
-        "I ain't readin all that"
+        "I ain't readin all that",
+        "No Fun League strikes again"
         ]
         response_message = random.choice(random_responses)
     
