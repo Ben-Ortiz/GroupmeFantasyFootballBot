@@ -658,7 +658,7 @@ def webhook():
             else:
                 response_message = "Sorry, I couldn't fetch the fantasy data."
         else:
-            response_message = "Week 1 is not over yet. Use command:\n!commmands to see what other commands you can use."
+            response_message = "Week 1 is not over yet.\n\nUse command:\n!commmands to see what other commands you can use."
 
     elif '!weekly2' == message:
         weekly_week = 2
@@ -675,7 +675,7 @@ def webhook():
             else:
                 response_message = "Sorry, I couldn't fetch the fantasy data."
         else:
-            response_message = "Week 2 is not over yet. Use command:\n!commmands to see what other commands you can use."
+            response_message = "Week 2 is not over yet.\n\nUse command:\n!commmands to see what other commands you can use."
 
     elif '!weekly3' == message:
         weekly_week = 3
@@ -691,7 +691,7 @@ def webhook():
             else:
                 response_message = "Sorry, I couldn't fetch the fantasy data."
         else:
-            response_message = "Week 3 is not over yet. Use command:\n!commmands to see what other commands you can use."
+            response_message = "Week 3 is not over yet.\n\nUse command:\n!commmands to see what other commands you can use."
 
     elif '!weekly4' == message:
         weekly_week = 4
@@ -708,7 +708,7 @@ def webhook():
             else:
                 response_message = "Sorry, I couldn't fetch the fantasy data."
         else:
-            response_message = "Week 4 is not over yet. Use command:\n!commmands to see what other commands you can use."
+            response_message = "Week 4 is not over yet.\n\nUse command:\n!commmands to see what other commands you can use."
 
     elif '!weekly5' == message:
         weekly_week = 5
@@ -726,7 +726,7 @@ def webhook():
             else:
                 response_message = "Sorry, I couldn't fetch the fantasy data."
         else:
-            response_message = "Week 5 is not over yet. Use command:\n!commmands to see what other commands you can use."
+            response_message = "Week 5 is not over yet.\n\nUse command:\n!commmands to see what other commands you can use."
 
     elif '!weekly6' == message:
         weekly_week = 6
@@ -749,7 +749,7 @@ def webhook():
             else:
                 response_message = "Sorry, I couldn't fetch the fantasy data."
         else:
-            response_message = "Week 6 is not over yet. Use command:\n!commmands to see what other commands you can use."
+            response_message = "Week 6 is not over yet.\n\nUse command:\n!commmands to see what other commands you can use."
 
     elif '!weekly7' == message:
         weekly_week = 7
@@ -765,7 +765,7 @@ def webhook():
             else:
                 response_message = "Sorry, I couldn't fetch the fantasy data."
         else:
-            response_message = "Week 7 is not over yet. Use command:\n!commmands to see what other commands you can use."
+            response_message = "Week 7 is not over yet.\n\nUse command:\n!commmands to see what other commands you can use."
 
     elif '!weekly8' == message:
         weekly_week = 8
@@ -782,7 +782,7 @@ def webhook():
             else:
                 response_message = "Sorry, I couldn't fetch the fantasy data."
         else:
-            response_message = "Week 8 is not over yet. Use command:\n!commmands to see what other commands you can use."
+            response_message = "Week 8 is not over yet.\n\nUse command:\n!commmands to see what other commands you can use."
 
     elif '!weekly9' == message:
         weekly_week = 9
@@ -800,7 +800,7 @@ def webhook():
             else:
                 response_message = "Sorry, I couldn't fetch the fantasy data."
         else:
-            response_message = "Week 9 is not over yet. Use command:\n!commmands to see what other commands you can use."
+            response_message = "Week 9 is not over yet.\n\nUse command:\n!commmands to see what other commands you can use."
         
     elif '!weekly10' == message:
         weekly_week = 10
@@ -819,7 +819,7 @@ def webhook():
             else:
                 response_message = "Sorry, I couldn't fetch the fantasy data."
         else:
-            response_message = "Week 10 is not over yet. Use command:\n!commmands to see what other commands you can use."
+            response_message = "Week 10 is not over yet.\n\nUse command:\n!commmands to see what other commands you can use."
 
     elif '!weekly11' == message:
         weekly_week = 11
@@ -837,7 +837,7 @@ def webhook():
             else:
                 response_message = "Sorry, I couldn't fetch the fantasy data."
         else:
-            response_message = "Week 11 is not over yet. Use command:\n!commmands to see what other commands you can use."
+            response_message = "Week 11 is not over yet.\n\nUse command:\n!commmands to see what other commands you can use."
 
     elif '!weekly12' == message:
         weekly_week = 12
@@ -859,7 +859,7 @@ def webhook():
             else:
                 response_message = "Sorry, I couldn't fetch the fantasy data."
         else:
-            response_message = "Week 12 is not over yet. Use command:\n!commmands to see what other commands you can use."
+            response_message = "Week 12 is not over yet.\n\nUse command:\n!commmands to see what other commands you can use."
 
     elif '!weekly13' == message:
         weekly_week = 13
@@ -876,7 +876,7 @@ def webhook():
             else:
                 response_message = "Sorry, I couldn't fetch the fantasy data."
         else:
-            response_message = "Week 13 is not over yet. Use command:\n!commmands to see what other commands you can use."
+            response_message = "Week 13 is not over yet.\n\nUse command:\n!commmands to see what other commands you can use."
 
     elif '!weekly14' == message:
         weekly_week = 14
@@ -895,7 +895,7 @@ def webhook():
             else:
                 response_message = "Sorry, I couldn't fetch the fantasy data."
         else:
-            response_message = "Week 14 is not over yet. Use command:\n!commmands to see what other commands you can use."
+            response_message = "Week 14 is not over yet.\n\nUse command:\n!commmands to see what other commands you can use."
 
     elif '!survival' == message:
         fantasy_data = survival_bowl(league)
