@@ -72,7 +72,32 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
             - Winner of Weekly 3 Bench Warmer - Team with the most total points from their bench: \n\nTeam Red (88.10 bench points)
 
 # How to Deploy on Glitch
-- Will add this in the future
+- Fork this repo
+- Go to [Glitch](https://glitch.com/)
+- Log in or make an account for Glitch
+- Copy the HTTPS Clone link of the Forked repo. Example: https://github.com/John-Doe/GroupmeFantasyFootballBot.git
+- Click New Project -> import from Github, paste the link in the popup
+- Make the config.py file with the information:
+    - BOT_ID = 'Your bot ID'
+        - Go to [GroupMe Developers](https://dev.groupme.com/bots)
+        - Log in or make an account
+        - Click "Bots" at the top
+        - Click "Create Bot"
+        - Choose group chat your bot will live in
+        - Name the bot
+        - Enter CallBack URL
+            - Example: https://your-project-name.glitch.me/
+        - Click Submit
+        - Click on bot you just made
+        - Copy Bot ID
+            - Example: 441076d3e670b76b9f03447eat
+    - ESPN_LEAGUE_ID = 'Your League ID'
+        - Go to Your ESPN Fantasy League
+        - Copy League ID in the URL
+            - Example: 12345678
+                - You can find it in the URL: https://fantasy.espn.com/football/league/scoreboard?leagueId=12345678&matchupPeriodId=7&mSPID=7
+    - ESPN_SEASON_YEAR = 2024
+- The bot should now be live in your group chat.
 
 # What I learned
 * Python: Syntax related to routing, requests, and config
