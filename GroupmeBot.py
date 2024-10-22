@@ -4,6 +4,7 @@ import requests
 import config
 import schedule
 import random
+import os
 
 app = Flask(__name__)
 
@@ -951,4 +952,9 @@ def send_message(msg):
 
 
 if __name__ == '__main__':
+    # uncomment below to run in dev server
     app.run(debug=True)
+    
+    # comment 2 lines below to stop prod server
+    # port = int(os.environ.get("PORT", 5000))
+    # app.run(host='0.0.0.0', port=port)
