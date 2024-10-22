@@ -92,7 +92,7 @@ def week13_weekly(league):
 
     for box_score in box_scores:
         for player in box_score.home_lineup + box_score.away_lineup:
-            if player.slot_position != "BE":
+            if player.slot_position != "BE" and player.slot_position != "IR":
                 difference_temp = player.points - blackjack
                 if difference_temp < difference_target and difference_temp >= 0:
                     difference_target = difference_temp
@@ -124,7 +124,7 @@ def week12_weekly(league):
 
     for box_score in box_scores:
         for player in box_score.home_lineup + box_score.away_lineup:
-            if player.slot_position == "WR" and player.slot_position != "BE":
+            if player.slot_position == "WR" and player.slot_position != "BE" and player.slot_position != "IR":
                 receptions = player.stats[week_number]['breakdown'].get('receivingReceptions', 0)
                 all_wrs[player]  = receptions
     
@@ -268,7 +268,7 @@ def week8_weekly(league):
     
     for box_score in box_scores:
         for player in box_score.home_lineup + box_score.away_lineup:
-            if player.slot_position == "BE":
+            if player.slot_position == "BE" and player.slot_position != "IR":
                 if player.points > top_player_points:
                     top_player_points = player.points
                     top_player = player
@@ -306,7 +306,7 @@ def week7_weekly(league):
         total_tds_away = 0
 
         for player in box_score.home_lineup:
-            if player.slot_position != "D/ST" and player.slot_position != "BE":
+            if player.slot_position != "D/ST" and player.slot_position != "BE" and player.slot_position != "IR":
                 rush_tds = player.stats[week_number]['breakdown'].get('rushingTouchdowns', 0)
                 receiving_tds = player.stats[week_number]['breakdown'].get('receivingTouchdowns', 0)
                 passing_tds = player.stats[week_number]['breakdown'].get('passingTouchdowns', 0)
@@ -318,7 +318,7 @@ def week7_weekly(league):
         team_dict[box_score.home_team] += total_tds_home
 
         for player in box_score.away_lineup:
-            if player.slot_position != "D/ST" and player.slot_position != "BE":
+            if player.slot_position != "D/ST" and player.slot_position != "BE" and player.slot_position != "IR":
                 rush_tds = player.stats[week_number]['breakdown'].get('rushingTouchdowns', 0)
                 receiving_tds = player.stats[week_number]['breakdown'].get('receivingTouchdowns', 0)
                 passing_tds = player.stats[week_number]['breakdown'].get('passingTouchdowns', 0)
@@ -426,7 +426,7 @@ def week4_weekly(league):
 
     for box_score in box_scores:
         for player in box_score.home_lineup + box_score.away_lineup:
-            if player.position == "RB":
+            if player.position == "RB" and player.slot_position != "BE" and player.slot_position != "IR":
                 if 'breakdown' in player.stats[4] and 'rushingYards' in player.stats[4]['breakdown']:
                         rushing_yards = player.stats[4]['breakdown'].get('rushingYards', 0)
                 else:
@@ -498,7 +498,7 @@ def week2_weekly(league):
     for box_score in box_scores:
         for player in box_score.home_lineup + box_score.away_lineup:
             # loop through all starting qbs id of each team
-            if player.slot_position == "QB" and player.slot_position != "BE":
+            if player.slot_position == "QB" and player.slot_position != "BE" and player.slot_position != "IR":
                 qb_id = player.playerId
                 url = base_url.format(qb_id)
                 response = requests.get(url)
@@ -529,7 +529,7 @@ def week2_weekly(league):
     # get the team that has the qb with the longest pass
     for box_score in box_scores:
         for player in box_score.home_lineup + box_score.away_lineup:
-            if player.slot_position == "QB" and player.slot_position != "BE":
+            if player.slot_position == "QB" and player.slot_position != "BE" and player.slot_position != "IR":
                 if top_qb in box_score.home_lineup:
                     top_qb_team = box_score.home_team.team_name
                 else:
@@ -623,12 +623,17 @@ def webhook():
             return "OK", 200
 
     if '!hello' == message:
-        response_message = "hello there"
-    elif '!bot' == message:
         formatted_response = (
                 f"Hi there! I'm Roger Goodell bot!\n\n"
-                f"Use command !weekly1 to find out who won the week 1 weekly, !weekly2 to find out who won the week 2 weekly and so on.\n\n"
-                f"Use command !survival to find out who is currently in the survival bowl."
+                f"Use command, !commands to see what other commands I can do."
+            )
+        response_message = formatted_response
+    elif '!commands' == message:
+        formatted_response = (
+                f"Here are the commands you can use\n\n"
+                f" - !weekly# - where # is the week number. !weekly1 to find out who won the week 1 weekly, !weekly2 to find out who won the week 2 weekly and so on.\n\n"
+                f" - !survival - to find out who is currently in the survival bowl.\n\n"
+                f" - !hello - to say hi to the bot."
             )
         response_message = formatted_response
     elif '!fantasy' == message:
@@ -638,180 +643,259 @@ def webhook():
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly1' == message:
-        fantasy_data = week1_weekly(league)
-        
-        if fantasy_data:
-            player_name = fantasy_data.get('player_name')
-            player_points = fantasy_data.get('player_points')
-            player_team = fantasy_data.get('player_team')
-            response_message = f"Winner of Weekly 1: Get Schwifty - Team with the single highest scoring starter: \n\n{player_team} ({player_name} {player_points})" 
-        else:
-            response_message = "Sorry, I couldn't fetch the fantasy data."
-    elif '!weekly2' == message:
-        fantasy_data = week2_weekly(league)
-        if fantasy_data:
-            top_qb = fantasy_data.get("top_qb")
-            longest_pass = fantasy_data.get("longest_pass")
-            player_team = fantasy_data.get("team")
-
-            response_message = f"Winner of Weekly 2: Chicks Dig The Long Ball - Team with the starting QB with the longest pass: \n\n{player_team} ({top_qb} {longest_pass} yard pass)" 
-        else:
-            response_message = "Sorry, I couldn't fetch the fantasy data."
-    elif '!weekly3' == message:
-        fantasy_data = week3_weekly(league)
-        
-        if fantasy_data:
-            team_name = fantasy_data.get('team_name')
-            total_points = fantasy_data.get('bench_points')
-            response_message = f"Winner of Weekly 3: Bench Warmer - Team with the most total points from their bench: \n\n{team_name} ({total_points} bench points)" 
-        else:
-            response_message = "Sorry, I couldn't fetch the fantasy data."
-    elif '!weekly4' == message:
-        fantasy_data = week4_weekly(league)
-        
-        if fantasy_data:
-            team_name = fantasy_data.get('team_name')
-            player_name = fantasy_data.get('player_name')
-            player_rushing_yards = fantasy_data.get('player_rushing_yards')
-            response_message = f"Winner of Weekly 4: Run Forrest Run! - Team with the starting RB with the most rushing yards: \n\n{team_name} ({player_name} {player_rushing_yards} rush yards)" 
-        else:
-            response_message = "Sorry, I couldn't fetch the fantasy data."
-    elif '!weekly5' == message:
-        fantasy_data = week5_weekly(league)
-        
-        if fantasy_data:
-            team_name = fantasy_data.get('team_name')
-            player_name = fantasy_data.get('player_name')
-            player_points = fantasy_data.get('player_points')
-            difference = fantasy_data.get('difference')
-            response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
-        else:
-            response_message = "Sorry, I couldn't fetch the fantasy data."
-    elif '!weekly6' == message:
-        fantasy_data = week6_weekly(league)
-
-        """
-        plan for this, 
-        example, 
-        weekly_week = 6
-        current week = 5, this does not run
-        current_week = 6, this does not run
-        current week = 7, this does run
-        weekly_week(6) < current_week(5) false dont run
-        weekly_week(6) < current_week(6) false dont run
-        weekly_week(6) < current_week(7) true run
-        
-        week 7 on 10/20/2024
-        """
-        nfl_week = league.nfl_week 
-        """
-        week 7 on 10/20/2024
-        """
+        weekly_week = 1
         current_week = league.current_week
 
-        if fantasy_data:
-            team_name = fantasy_data.get('team_name')
-            team__points_projected = fantasy_data.get('team_points_projected')
-            team_points_actual = fantasy_data.get('team_points_actual')
-            difference = team_points_actual - team__points_projected
-
-            clean_team_name = team_name.team_name
-            team__points_projected_formatted = f"{team__points_projected:.2f}"
-            team_points_actual_formatted = f"{team_points_actual:.2f}"
-            difference_formatted = f"{difference:.2f}"
-            response_message = f"Winner of Weekly 6: Over Achiever - Team with most points over their weekly projections with their starters: \n\n{clean_team_name} (points projected: {team__points_projected_formatted} points, points actual: {team_points_actual_formatted} points, difference: {difference_formatted} points)" 
-        else:
-            response_message = "Sorry, I couldn't fetch the fantasy data."
-    elif '!weekly7' == message:
-        fantasy_data = week7_weekly(league)
-        
-        if fantasy_data:
-            team_name = fantasy_data.get('team_name')
-            team_total_tds = fantasy_data.get('top_team_tds')
-            response_message = f"Winner of Weekly 7: Touchdown Thurman Thomas - Team with the most offensive touchdowns scored with their starters: \n\n{team_name} ({team_total_tds} tds)" 
-        else:
-            response_message = "Sorry, I couldn't fetch the fantasy data."
-    elif '!weekly8' == message:
-        fantasy_data = week8_weekly(league)
-
-        if fantasy_data:
-            team_name = fantasy_data.get("top_team")
-            player_name = fantasy_data.get("top_player")
-            player_points = fantasy_data.get("top_player_points")
-            response_message = f"Winner of Weekly 8: Should have Swiped Right - Team with the highest scorer on the bench: \n\n{team_name} ({player_name} {player_points} points)" 
-        else:
-            response_message = "Sorry, I couldn't fetch the fantasy data."
-    elif '!weekly9' == message:
-        fantasy_data = week9_weekly(league)
-
-        if fantasy_data:
-            team_name = fantasy_data.get("top_team")
-            difference = fantasy_data.get("difference")
-            actual_score = fantasy_data.get("actual_score")
-            projected_score = fantasy_data.get("projected_score")
-            response_message = f"Winner of Weekly 9: Bulls-eye - Team closest to their projcted point total (over OR under): \n\n{team_name} (Projected: {projected_score} points, Actual: {actual_score} points, difference of {difference:.2f} points)" 
-        else:
-            response_message = "Sorry, I couldn't fetch the fantasy data."
-    elif '!weekly10' == message:
-        fantasy_data = week10_weekly(league)
-
-        if fantasy_data:
-            winning_team = fantasy_data.get("winning_team")
-            winning_team_score = fantasy_data.get("winning_team_score")
-            difference = fantasy_data.get("difference")
-            losing_team = fantasy_data.get("losing_team")
-            losing_team_score = fantasy_data.get("losing_team_score")
-            response_message = f"Winner of Weekly 10: Blownout.com/rekt - Team that wins with the biggest points margin of victory: \n\n{winning_team} ({winning_team_score} points, won by {difference:.2f} vs {losing_team}, {losing_team_score} )" 
-        else:
-            response_message = "Sorry, I couldn't fetch the fantasy data."
-    elif '!weekly11' == message:
-        fantasy_data = week11_weekly(league)
-
-        if fantasy_data:
-            top_loser = fantasy_data.get("top_loser")
-            top_loser_score = fantasy_data.get("top_loser_score")
-            winning_team = fantasy_data.get("winning_team")
-            winning_team_score = fantasy_data.get("winning_team_score")
-            response_message = f"Winner of Weekly 11: Best Loser - Team that loses with the highest score: \n\n{top_loser} (Lost with {top_loser_score} points vs {winning_team} {winning_team_score} points)" 
-        else:
-            response_message = "Sorry, I couldn't fetch the fantasy data."
-    elif '!weekly12' == message:
-        fantasy_data = week12_weekly(league)
-        if fantasy_data:
-            top_teams = fantasy_data.get("top_teams")
-            max_receptions = fantasy_data.get("max_receptions")
-            message = []
-            for team, player in top_teams.items():
-                team_name = team.team_name
-                player_name = player.name
-                message_temp = f"{team_name} ({player_name}, {max_receptions} receptions)"
-                message.append(message_temp)
+        if weekly_week < current_week:
+            fantasy_data = week1_weekly(league)
             
-            response_message = f"Winner of Weekly 12: Gotta Catch Em All - Teams with the starting WRs with the most receptions: \n\n" + "\n".join(message)
+            if fantasy_data:
+                player_name = fantasy_data.get('player_name')
+                player_points = fantasy_data.get('player_points')
+                player_team = fantasy_data.get('player_team')
+                response_message = f"Winner of Weekly 1: Get Schwifty - Team with the single highest scoring starter: \n\n{player_team} ({player_name} {player_points})" 
+            else:
+                response_message = "Sorry, I couldn't fetch the fantasy data."
         else:
-            response_message = "Sorry, I couldn't fetch the fantasy data."
+            response_message = "Week 1 is not over yet. Use command:\n!commmands to see what other commands you can use."
+
+    elif '!weekly2' == message:
+        weekly_week = 2
+        current_week = league.current_week
+
+        if weekly_week < current_week:
+            fantasy_data = week2_weekly(league)
+            if fantasy_data:
+                top_qb = fantasy_data.get("top_qb")
+                longest_pass = fantasy_data.get("longest_pass")
+                player_team = fantasy_data.get("team")
+
+                response_message = f"Winner of Weekly 2: Chicks Dig The Long Ball - Team with the starting QB with the longest pass: \n\n{player_team} ({top_qb} {longest_pass} yard pass)" 
+            else:
+                response_message = "Sorry, I couldn't fetch the fantasy data."
+        else:
+            response_message = "Week 2 is not over yet. Use command:\n!commmands to see what other commands you can use."
+
+    elif '!weekly3' == message:
+        weekly_week = 3
+        current_week = league.current_week
+
+        if weekly_week < current_week:
+            fantasy_data = week3_weekly(league)
+            
+            if fantasy_data:
+                team_name = fantasy_data.get('team_name')
+                total_points = fantasy_data.get('bench_points')
+                response_message = f"Winner of Weekly 3: Bench Warmer - Team with the most total points from their bench: \n\n{team_name} ({total_points} bench points)" 
+            else:
+                response_message = "Sorry, I couldn't fetch the fantasy data."
+        else:
+            response_message = "Week 3 is not over yet. Use command:\n!commmands to see what other commands you can use."
+
+    elif '!weekly4' == message:
+        weekly_week = 4
+        current_week = league.current_week
+
+        if weekly_week < current_week:
+            fantasy_data = week4_weekly(league)
+            
+            if fantasy_data:
+                team_name = fantasy_data.get('team_name')
+                player_name = fantasy_data.get('player_name')
+                player_rushing_yards = fantasy_data.get('player_rushing_yards')
+                response_message = f"Winner of Weekly 4: Run Forrest Run! - Team with the starting RB with the most rushing yards: \n\n{team_name} ({player_name} {player_rushing_yards} rush yards)" 
+            else:
+                response_message = "Sorry, I couldn't fetch the fantasy data."
+        else:
+            response_message = "Week 4 is not over yet. Use command:\n!commmands to see what other commands you can use."
+
+    elif '!weekly5' == message:
+        weekly_week = 5
+        current_week = league.current_week
+
+        if weekly_week < current_week:
+            fantasy_data = week5_weekly(league)
+            
+            if fantasy_data:
+                team_name = fantasy_data.get('team_name')
+                player_name = fantasy_data.get('player_name')
+                player_points = fantasy_data.get('player_points')
+                difference = fantasy_data.get('difference')
+                response_message = f"Winner of Weekly 5: Dirty 30 - Team with any starter closest to 30 points: \n\n{team_name} ({player_name} {player_points} points, {difference} difference to 30)" 
+            else:
+                response_message = "Sorry, I couldn't fetch the fantasy data."
+        else:
+            response_message = "Week 5 is not over yet. Use command:\n!commmands to see what other commands you can use."
+
+    elif '!weekly6' == message:
+        weekly_week = 6
+        current_week = league.current_week
+
+        if weekly_week < current_week:
+            fantasy_data = week6_weekly(league)
+
+            if fantasy_data:
+                team_name = fantasy_data.get('team_name')
+                team__points_projected = fantasy_data.get('team_points_projected')
+                team_points_actual = fantasy_data.get('team_points_actual')
+                difference = team_points_actual - team__points_projected
+
+                clean_team_name = team_name.team_name
+                team__points_projected_formatted = f"{team__points_projected:.2f}"
+                team_points_actual_formatted = f"{team_points_actual:.2f}"
+                difference_formatted = f"{difference:.2f}"
+                response_message = f"Winner of Weekly 6: Over Achiever - Team with most points over their weekly projections with their starters: \n\n{clean_team_name} (points projected: {team__points_projected_formatted} points, points actual: {team_points_actual_formatted} points, difference: {difference_formatted} points)" 
+            else:
+                response_message = "Sorry, I couldn't fetch the fantasy data."
+        else:
+            response_message = "Week 6 is not over yet. Use command:\n!commmands to see what other commands you can use."
+
+    elif '!weekly7' == message:
+        weekly_week = 7
+        current_week = league.current_week
+
+        if weekly_week < current_week:
+            fantasy_data = week7_weekly(league)
+            
+            if fantasy_data:
+                team_name = fantasy_data.get('team_name')
+                team_total_tds = fantasy_data.get('top_team_tds')
+                response_message = f"Winner of Weekly 7: Touchdown Thurman Thomas - Team with the most offensive touchdowns scored with their starters: \n\n{team_name} ({team_total_tds} tds)" 
+            else:
+                response_message = "Sorry, I couldn't fetch the fantasy data."
+        else:
+            response_message = "Week 7 is not over yet. Use command:\n!commmands to see what other commands you can use."
+
+    elif '!weekly8' == message:
+        weekly_week = 8
+        current_week = league.current_week
+
+        if weekly_week < current_week:
+            fantasy_data = week8_weekly(league)
+
+            if fantasy_data:
+                team_name = fantasy_data.get("top_team")
+                player_name = fantasy_data.get("top_player")
+                player_points = fantasy_data.get("top_player_points")
+                response_message = f"Winner of Weekly 8: Should have Swiped Right - Team with the highest scorer on the bench: \n\n{team_name} ({player_name} {player_points} points)" 
+            else:
+                response_message = "Sorry, I couldn't fetch the fantasy data."
+        else:
+            response_message = "Week 8 is not over yet. Use command:\n!commmands to see what other commands you can use."
+
+    elif '!weekly9' == message:
+        weekly_week = 9
+        current_week = league.current_week
+
+        if weekly_week < current_week:
+            fantasy_data = week9_weekly(league)
+
+            if fantasy_data:
+                team_name = fantasy_data.get("top_team")
+                difference = fantasy_data.get("difference")
+                actual_score = fantasy_data.get("actual_score")
+                projected_score = fantasy_data.get("projected_score")
+                response_message = f"Winner of Weekly 9: Bulls-eye - Team closest to their projcted point total (over OR under): \n\n{team_name} (Projected: {projected_score} points, Actual: {actual_score} points, difference of {difference:.2f} points)" 
+            else:
+                response_message = "Sorry, I couldn't fetch the fantasy data."
+        else:
+            response_message = "Week 9 is not over yet. Use command:\n!commmands to see what other commands you can use."
+        
+    elif '!weekly10' == message:
+        weekly_week = 10
+        current_week = league.current_week
+
+        if weekly_week < current_week:
+            fantasy_data = week10_weekly(league)
+
+            if fantasy_data:
+                winning_team = fantasy_data.get("winning_team")
+                winning_team_score = fantasy_data.get("winning_team_score")
+                difference = fantasy_data.get("difference")
+                losing_team = fantasy_data.get("losing_team")
+                losing_team_score = fantasy_data.get("losing_team_score")
+                response_message = f"Winner of Weekly 10: Blownout.com/rekt - Team that wins with the biggest points margin of victory: \n\n{winning_team} ({winning_team_score} points, won by {difference:.2f} vs {losing_team}, {losing_team_score} )" 
+            else:
+                response_message = "Sorry, I couldn't fetch the fantasy data."
+        else:
+            response_message = "Week 10 is not over yet. Use command:\n!commmands to see what other commands you can use."
+
+    elif '!weekly11' == message:
+        weekly_week = 11
+        current_week = league.current_week
+
+        if weekly_week < current_week:
+            fantasy_data = week11_weekly(league)
+
+            if fantasy_data:
+                top_loser = fantasy_data.get("top_loser")
+                top_loser_score = fantasy_data.get("top_loser_score")
+                winning_team = fantasy_data.get("winning_team")
+                winning_team_score = fantasy_data.get("winning_team_score")
+                response_message = f"Winner of Weekly 11: Best Loser - Team that loses with the highest score: \n\n{top_loser} (Lost with {top_loser_score} points vs {winning_team} {winning_team_score} points)" 
+            else:
+                response_message = "Sorry, I couldn't fetch the fantasy data."
+        else:
+            response_message = "Week 11 is not over yet. Use command:\n!commmands to see what other commands you can use."
+
+    elif '!weekly12' == message:
+        weekly_week = 12
+        current_week = league.current_week
+
+        if weekly_week < current_week:
+            fantasy_data = week12_weekly(league)
+            if fantasy_data:
+                top_teams = fantasy_data.get("top_teams")
+                max_receptions = fantasy_data.get("max_receptions")
+                message = []
+                for team, player in top_teams.items():
+                    team_name = team.team_name
+                    player_name = player.name
+                    message_temp = f"{team_name} ({player_name}, {max_receptions} receptions)"
+                    message.append(message_temp)
+                
+                response_message = f"Winner of Weekly 12: Gotta Catch Em All - Teams with the starting WRs with the most receptions: \n\n" + "\n".join(message)
+            else:
+                response_message = "Sorry, I couldn't fetch the fantasy data."
+        else:
+            response_message = "Week 12 is not over yet. Use command:\n!commmands to see what other commands you can use."
+
     elif '!weekly13' == message:
-        fantasy_data = week13_weekly(league)
-        if fantasy_data:
-            top_player = fantasy_data.get("top_player")
-            top_player_points = fantasy_data.get("top_player_points")
-            top_team = fantasy_data.get("top_team")
+        weekly_week = 13
+        current_week = league.current_week
 
-            response_message = f"Winner of Weekly 13: Blackjack - Team with a starter closest to 21 points without going over: \n\n{top_team} ({top_player} {top_player_points} points)" 
+        if weekly_week < current_week:
+            fantasy_data = week13_weekly(league)
+            if fantasy_data:
+                top_player = fantasy_data.get("top_player")
+                top_player_points = fantasy_data.get("top_player_points")
+                top_team = fantasy_data.get("top_team")
+
+                response_message = f"Winner of Weekly 13: Blackjack - Team with a starter closest to 21 points without going over: \n\n{top_team} ({top_player} {top_player_points} points)" 
+            else:
+                response_message = "Sorry, I couldn't fetch the fantasy data."
         else:
-            response_message = "Sorry, I couldn't fetch the fantasy data."
+            response_message = "Week 13 is not over yet. Use command:\n!commmands to see what other commands you can use."
+
     elif '!weekly14' == message:
-        fantasy_data = week14_weekly(league)
-        if fantasy_data:
-            winning_team = fantasy_data.get("winning_team")
-            winning_team_score = fantasy_data.get("winning_team_score")
-            losing_team = fantasy_data.get("losing_team")
-            losing_team_score = fantasy_data.get("losing_team_score")
-            difference = fantasy_data.get("difference")
+        weekly_week = 14
+        current_week = league.current_week
 
-            response_message = f"Winner of Weekly 14: Photo Finish - Team that beats its opponent by the smallest margin of victory: \n\n{winning_team} ({winning_team} {winning_team_score} points vs {losing_team} {losing_team_score} points, {difference:.2f} difference)" 
+        if weekly_week < current_week:
+            fantasy_data = week14_weekly(league)
+            if fantasy_data:
+                winning_team = fantasy_data.get("winning_team")
+                winning_team_score = fantasy_data.get("winning_team_score")
+                losing_team = fantasy_data.get("losing_team")
+                losing_team_score = fantasy_data.get("losing_team_score")
+                difference = fantasy_data.get("difference")
+
+                response_message = f"Winner of Weekly 14: Photo Finish - Team that beats its opponent by the smallest margin of victory: \n\n{winning_team} ({winning_team} {winning_team_score} points vs {losing_team} {losing_team_score} points, {difference:.2f} difference)" 
+            else:
+                response_message = "Sorry, I couldn't fetch the fantasy data."
         else:
-            response_message = "Sorry, I couldn't fetch the fantasy data."
+            response_message = "Week 14 is not over yet. Use command:\n!commmands to see what other commands you can use."
+
     elif '!survival' == message:
         fantasy_data = survival_bowl(league)
         if fantasy_data:
@@ -835,6 +919,7 @@ def webhook():
     else:
         response_message = "bruhhhhhhhh"
     
+
     send_message(response_message)
     return jsonify({"status": "OK", "response": response_message}), 200
 
