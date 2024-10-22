@@ -69,7 +69,6 @@ def week14_weekly(league):
                 losing_team = box_score.home_team
                 losing_team_score = box_score.home_score
     
-
     return {
         "winning_team" : winning_team.team_name,
         "winning_team_score": winning_team_score,
