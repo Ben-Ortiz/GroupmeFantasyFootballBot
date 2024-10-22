@@ -36,7 +36,7 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
     - Winner of consolation ladder
 - ✅ Check if trying to get info on future weekly and to not give info yet if that week is not over.
 - Schedule the weekly to trigger every Wednesday for current week and the survival bowl automatically
-- Detects if somneone says "good bot" or "bad bot" and responds accordingly
+- ✅ Detects if somneone says "good bot" or "bad bot" and responds accordingly
 
 # What to do when new season starts
 - Will add this in future but most likely have to edit config file. create a new bot, get new bot id, enter new league id, and enter new year
