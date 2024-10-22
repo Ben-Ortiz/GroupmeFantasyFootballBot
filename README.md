@@ -34,6 +34,7 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
 - 1st, 2nd, 3rd, place command  
 - Consolation prize command
     - Winner of consolation ladder
+- ✅ Check if trying to get info on future weekly and to not give info yet if that week is not over.
 
 # What to do when new season starts
 - Will add this in future but most likely have to edit config file. create a new bot, get new bot id, enter new league id, and enter new year
@@ -79,7 +80,7 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
 * Python: Cleaner code, exception handling, logging.
 * Functionality:   
     - ✅ Add weekly announcements based on that week's weekly. Example: week 1, team with starter with most points, and announce that in groupchat when giving a command in the format of !weekly#, where # is the week number. Example: !weekly2.  
-    - Add weekly annoucnement based on survival bowl. Example: every week, eliminate team from list of who has the least amount of points. End of season only 1 team remains.  
+    - ✅ Add weekly annoucnement based on survival bowl. Example: every week, eliminate team from list of who has the least amount of points. End of season only 1 team remains.  
     - Put logic for ties (2 teams have same score and how to resolve those ties) for all weeks.  
     - Consistent error checking for all weeks.
     - Maybe Defenses are not considered players and should not be counted.
