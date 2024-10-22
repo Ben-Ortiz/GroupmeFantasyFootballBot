@@ -44,7 +44,7 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
 # What to do when new season starts
 - Will add this in future but most likely have to edit config file. create a new bot, get new bot id, enter new league id, and enter new year
 
-# How to test
+# How to test locally
 1. Git clone into your machine  
 2. Create a config.py in the same location as testGroupmeBot.py, and add your bot id, espn league id, and espn season year  
     - To get your bot id, login to the [GroupMe Developers site](https://dev.groupme.com/), log in or make an account, click on Bots, and you should find your Bot Id.
@@ -54,7 +54,7 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
         - BOT_ID = 'asfd987sfda978'
         - ESPN_LEAGUE_ID = '12345678'
         - ESPN_SEASON_YEAR = 2024
-3. Run the program, making sure to have Flask, and espn_api installed on your machine
+3. Run the program with VSCode, making sure to have Flask, and espn_api installed on your machine
     - If theyre not installed on your machine use the commands:
         - pip install flask
         - pip install espn_api
