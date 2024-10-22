@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from espn_api.football import League
 import requests
 import config
+import schedule
 
 app = Flask(__name__)
 
@@ -931,6 +932,7 @@ def send_message(msg):
         'text': msg
     }
     requests.post(base_url, json=data)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
