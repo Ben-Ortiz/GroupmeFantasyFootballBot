@@ -3,8 +3,17 @@ from espn_api.football import League
 import requests
 import config
 import schedule
+import random
 
 app = Flask(__name__)
+
+random_responses = [
+        "bruhhhhhhhh idk what means",
+        "Sheeeeeeeesh",
+        "Skibidi toilet or something like that",
+        "Ayoooooo",
+        "That's wild"
+        ]
 
 def survival_bowl(league):
     current_week = league.nfl_week
@@ -928,7 +937,7 @@ def webhook():
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     else:
-        response_message = "bruhhhhhhhh idk what means"
+        response_message = random.choice(random_responses)
     
 
     send_message(response_message)
