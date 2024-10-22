@@ -596,9 +596,6 @@ def fetch_fantasy_data():
         # Initialize the league object
         league = League(league_id=config.ESPN_LEAGUE_ID, year=config.ESPN_SEASON_YEAR)
         team_data = []
-        
-        top_rushing_yards = 0
-        top_player = None
         week_number = 4
         box_scores = league.box_scores(week=week_number)
         for box_score in box_scores:
