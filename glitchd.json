@@ -1,4 +1,0 @@
-{
-  "install": "pip3 install -r requirements.txt",
-  "start": "gunicorn --reload GroupMeBot:app --bind 0.0.0.0:3000 --workers 2"
-}

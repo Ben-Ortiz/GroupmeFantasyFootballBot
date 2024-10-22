@@ -2,4 +2,3 @@ flask
 requests
 espn_api
 schedule
-gunicorn

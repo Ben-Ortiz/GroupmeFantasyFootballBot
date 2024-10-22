@@ -1,3 +1,3 @@
 #!/bin/bash
-pip install --upgrade pip
+pip3 install --upgrade pip
 python3 GroupMeBot.py
