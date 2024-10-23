@@ -42,12 +42,13 @@ def survival_bowl_scheduled():
 def schedule_survival_bowl():
     # Schedule the task (e.g., run every Monday at 10 AM)
     # Glitch uses UTC time zone not EST, so EST to UTC +4 hours 
-    schedule.every().wednesday.at("12:16").do(survival_bowl_scheduled)
+    # schedule.every().wednesday.at("12:16").do(survival_bowl_scheduled)
     # schedule.every(5).seconds.do(survival_bowl_scheduled)
 
-    while True:
-        schedule.run_pending()
-        time.sleep(1)  # Check every minute(60) if the job should run
+    # while True:
+    #     schedule.run_pending()
+    #     time.sleep(1)  # Check every minute(60) if the job should run
+    pass
 
 
 def survival_bowl(league):
@@ -994,10 +995,9 @@ def send_message(msg):
 
 
 if __name__ == '__main__':
-    print(datetime.datetime.now())
-    # Start the scheduler in a separate thread
-    scheduler_thread = threading.Thread(target=schedule_survival_bowl)
-    scheduler_thread.daemon = True  # Daemon thread will exit when the main program exits
-    scheduler_thread.start()
-    # uncomment below to run in dev server
+    # print(datetime.datetime.now())
+    # # Start the scheduler in a separate thread
+    # scheduler_thread = threading.Thread(target=schedule_survival_bowl)
+    # scheduler_thread.daemon = True  # Daemon thread will exit when the main program exits
+    # scheduler_thread.start()
     app.run(debug=True)
