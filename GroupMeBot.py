@@ -5,8 +5,50 @@ import config
 import schedule
 import random
 import os
+import time
+import threading
+import datetime
 
 app = Flask(__name__)
+
+# testing
+def survival_bowl_scheduled():
+  league = League(league_id=config.ESPN_LEAGUE_ID, year=config.ESPN_SEASON_YEAR)
+  fantasy_data = survival_bowl(league)
+  if fantasy_data:
+      surviving_teams = fantasy_data.get("surviving_teams")
+      dead_teams = fantasy_data.get("dead_teams")
+      current_week = league.nfl_week - 1
+
+      formatted_surviving_teams = "\n".join(f" - {team}" for team in surviving_teams)
+      formatted_dead_teams = "\n".join(f" - {team}: ({score} points)" for team, score in dead_teams.items())
+      formatted_response = (
+          f"Survival Bowl\n"
+          f"Lowest score each week is eliminated. Last team standing wins.\n\n"
+          f"Week {current_week}\n"
+          f"Surviving teams:\n{formatted_surviving_teams}\n\n"
+          f"Eliminated teams:\n{formatted_dead_teams}"
+      )
+
+      response_message = formatted_response
+      send_message(response_message) 
+      return {"status": "OK", "response": response_message}
+  else:
+      response_message = "Sorry, I couldn't fetch the fantasy data."
+      send_message(response_message) 
+      return {"status": "OK", "response": response_message}
+
+#testing
+def schedule_survival_bowl():
+    # Schedule the task (e.g., run every Monday at 10 AM)
+    # Glitch uses UTC time zone not EST, so EST to UTC +4 hours 
+    schedule.every().wednesday.at("12:16").do(survival_bowl_scheduled)
+    # schedule.every(5).seconds.do(survival_bowl_scheduled)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)  # Check every minute(60) if the job should run
+
 
 def survival_bowl(league):
     current_week = league.nfl_week
@@ -952,5 +994,10 @@ def send_message(msg):
 
 
 if __name__ == '__main__':
+    print(datetime.datetime.now())
+    # Start the scheduler in a separate thread
+    scheduler_thread = threading.Thread(target=schedule_survival_bowl)
+    scheduler_thread.daemon = True  # Daemon thread will exit when the main program exits
+    scheduler_thread.start()
     # uncomment below to run in dev server
     app.run(debug=True)
