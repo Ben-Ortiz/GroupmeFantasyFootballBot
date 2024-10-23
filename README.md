@@ -1,5 +1,5 @@
 # GroupMe Fantasy Football bot
-This is a GroupMe bot built with Python and Flask, utilizing [cwebdt94's Python ESPN API](https://github.com/cwendt94/espn-api) and the ESPN "Gamelog" API endpoint listed in [nntrn's espn-wiki repo](https://github.com/nntrn/espn-wiki), to send messages to a group chat in Groupme about Fantasy Football related data, deployed on [Glitch](https://glitch.com)
+This is a GroupMe bot built with Python and Flask, utilizing [cwebdt94's Python ESPN API](https://github.com/cwendt94/espn-api) and the ESPN "Gamelog" API endpoint listed in [nntrn's espn-wiki repo](https://github.com/nntrn/espn-wiki), to send messages to a group chat in Groupme about Fantasy Football related data, deployed on [Glitch](https://glitch.com/~groupme-fantasy-football-bot-prod)
 
 The bot's purpose is to respond with the winning team based on the "weekly" if you message the GroupMe chat where the bots lives with the command "!weekly#, where # is the week number.  
   
