@@ -40,10 +40,10 @@ def survival_bowl_scheduled():
 
 #testing
 def schedule_survival_bowl():
-    # Schedule the task (e.g., run every Monday at 10 AM)
-    # Glitch uses UTC time zone not EST, so EST to UTC +4 hours 
+    # # Schedule the task (e.g., run every Monday at 10 AM)
+    # # Glitch uses UTC time zone not EST, so EST to UTC +4 hours 
     # schedule.every().wednesday.at("12:16").do(survival_bowl_scheduled)
-    # schedule.every(5).seconds.do(survival_bowl_scheduled)
+    # # .every(5).seconds.do(survival_bowl_scheduled)
 
     # while True:
     #     schedule.run_pending()
