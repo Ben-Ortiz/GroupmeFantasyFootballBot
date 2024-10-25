@@ -15,9 +15,13 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
         - Example: !weekly1
 - !survival
     - Bot responds with the list of surviving and eliminated teams for the surival bowl
+- !week
+    - Bot responds with current NFL week
+- !commands
+    - Bot responds with commands users can use
 - !hello
     - Bot responds by introducing itself
-- ![anything else]
+- !<anything else\>
     - Bot responds with a random response
 - "bad bot"
     - Bot responds negatively
