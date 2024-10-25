@@ -59,6 +59,7 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
 - ✅ Added a random response to the else statement
 - ✅ ~~Added ability to run bot a production server gunicorn when running on Glitch~~
     - got rid of this because of errors on Glitch
+- Command to show list of weeklies
 
 # What to do when new season starts
 - Will add this in future but most likely have to edit config file. create a new bot, get new bot id, enter new league id, and enter new year
