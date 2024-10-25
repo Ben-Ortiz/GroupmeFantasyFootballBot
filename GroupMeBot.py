@@ -634,6 +634,10 @@ def random_response():
         ]
     return random.choice(random_responses)
 
+def what_week():
+    league = League(league_id=config.ESPN_LEAGUE_ID, year=config.ESPN_SEASON_YEAR)
+    return league.current_week
+
 # this method is for testing
 def fetch_fantasy_data():
     try:
@@ -694,13 +698,20 @@ def webhook():
                 f"Here are the commands you can use\n\n"
                 f" - !weekly# - where # is the week number. !weekly1 to find out who won the week 1 weekly, !weekly2 to find out who won the week 2 weekly and so on.\n\n"
                 f" - !survival - to find out who is currently in the survival bowl.\n\n"
-                f" - !hello - to say hi to the bot."
+                f" - !hello - to say hi to the bot.\n\n"
+                f" - !week - to find out the current week"
             )
         response_message = formatted_response
     elif '!fantasy' == message:
         fantasy_data = fetch_fantasy_data()
         if fantasy_data:
             response_message = f"Fantasy league data: {fantasy_data}"
+        else:
+            response_message = "Sorry, I couldn't fetch the fantasy data."
+    elif '!week' == message:
+        fantasy_data = what_week()
+        if fantasy_data:
+            response_message = f"It is week {fantasy_data}"
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
     elif '!weekly1' == message:
