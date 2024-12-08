@@ -56,10 +56,10 @@ So the team that won the week 1 weekly is Team Red, because Patrick Mahomes scor
 - ✅ Check if trying to get info on future weekly and to not give info yet if that week is not over.
 - Schedule the weekly to trigger every Wednesday for current week and the survival bowl automatically
 - ✅ Detects if somneone says "good bot" or "bad bot" and responds accordingly
-- ✅ Added a random response to the else statement  
-✅ ~~Added ability to run bot a production server gunicorn when running on Glitch~~
+- ✅ Added a random response to the else statement
+- ✅ ~~Added ability to run bot a production server gunicorn when running on Glitch~~
     - got rid of this because of errors on Glitch
-- [ ] Command to show list of weeklies
+- Command to show list of weeklies
 
 # What to do when new season starts
 - Will add this in future but most likely have to edit config file. create a new bot, get new bot id, enter new league id, and enter new year
