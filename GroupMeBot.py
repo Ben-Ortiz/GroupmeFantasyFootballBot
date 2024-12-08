@@ -137,8 +137,8 @@ def week13_weekly(league):
 
     for box_score in box_scores:
         for player in box_score.home_lineup + box_score.away_lineup:
-            if player.slot_position != "BE" and player.slot_position != "IR":
-                difference_temp = player.points - blackjack
+            if player.slot_position != "BE" and player.slot_position != "IR" and player.points < blackjack:
+                difference_temp = blackjack - player.points
                 if difference_temp < difference_target and difference_temp >= 0:
                     difference_target = difference_temp
                     top_player = player
