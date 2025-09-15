@@ -1076,6 +1076,8 @@ def webhook():
             response_message = formatted_response
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
+    elif "!weeklylist" == message:
+        response_message = weeklylist()
     else:
         response_message = random_response()
 
