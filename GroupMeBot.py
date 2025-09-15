@@ -66,7 +66,7 @@ def survival_bowl(league):
             away_team = box_score.away_team
             all_team_names_and_scores[home_team] = box_score.home_score
             all_team_names_and_scores[away_team] = box_score.away_score
-                
+
         # get rid of all teams where the key is an int (for some reason, teams eliminated they turn into ints, idk why)
         filtered_all_team_names_and_scores = {key: value for key, value in all_team_names_and_scores.items() if not isinstance(key, int)}
         bottom_team = min(filtered_all_team_names_and_scores, key=filtered_all_team_names_and_scores.get)
@@ -77,7 +77,7 @@ def survival_bowl(league):
 
     for team in all_teams:
         surviving_teams.append(team.team_name)
-    
+
     if all_teams:
         return {
             "surviving_teams": surviving_teams,
@@ -113,7 +113,7 @@ def week14_weekly(league):
                 winning_team_score = box_score.away_score
                 losing_team = box_score.home_team
                 losing_team_score = box_score.home_score
-    
+
     return {
         "winning_team" : winning_team.team_name,
         "winning_team_score": winning_team_score,
@@ -172,7 +172,7 @@ def week12_weekly(league):
             if player.slot_position == "WR" and player.slot_position != "BE" and player.slot_position != "IR":
                 receptions = player.stats[week_number]['breakdown'].get('receivingReceptions', 0)
                 all_wrs[player]  = receptions
-    
+
     max_receptions = max(all_wrs.values())
     # max_receptions = 7
     top_wrs = [element for element, receptions in all_wrs.items() if receptions == max_receptions]
@@ -205,7 +205,7 @@ def week11_weekly(league):
     winning_team_score = 0
 
     box_scores = league.box_scores(week=week_number)
-    
+
     for box_score in box_scores:
         if box_score.home_score < box_score.away_score:
             losing_teams[box_score.home_team] = box_score.home_score
@@ -233,7 +233,7 @@ def week11_weekly(league):
         }
     else:
         return None
-    
+
 
 # Returns team that wins with the bigest points of margin of victory for week 10
 def week10_weekly(league):
@@ -243,9 +243,9 @@ def week10_weekly(league):
     losing_team = None
     losing_team_score = 0
     difference = -1
-    
+
     box_scores = league.box_scores(week=week_number)
-    
+
     for box_score in box_scores:
         difference_both = abs(box_score.home_score - box_score.away_score)
         if difference_both > difference:
@@ -260,7 +260,7 @@ def week10_weekly(league):
                 winning_team_score = box_score.away_score
                 losing_team = box_score.home_team
                 losing_team_score = box_score.home_score
-    
+
     return {
         "winning_team": winning_team.team_name,
         "winning_team_score": winning_team_score,
@@ -277,9 +277,9 @@ def week9_weekly(league):
     difference = 500
     actual_score = 0
     projected_score = 0
-    
+
     box_scores = league.box_scores(week = week_number)
-    
+
     for box_score in box_scores:
         difference_home = abs(box_score.home_score - box_score.home_projected)
         if difference_home < difference:
@@ -287,21 +287,21 @@ def week9_weekly(league):
             top_team = box_score.home_team
             actual_score = box_score.home_score
             projected_score = box_score.home_projected
-        
+
         difference_away = abs(box_score.away_score - box_score.away_projected)
         if difference_away < difference:
             difference = difference_away
             top_team = box_score.away_team
             actual_score = box_score.away_score
             projected_score = box_score.away_projected
-        
+
     return {
         "top_team": top_team.team_name,
         "difference": difference,
         "actual_score": actual_score,
         "projected_score": projected_score
     }
-    
+
 
 # Returns team with highest scoring player on the bench for week 8
 def week8_weekly(league):
@@ -310,19 +310,19 @@ def week8_weekly(league):
     top_player = None
     top_player_points = 0
     box_scores = league.box_scores(week = week_number)
-    
+
     for box_score in box_scores:
         for player in box_score.home_lineup + box_score.away_lineup:
             if player.slot_position == "BE" and player.slot_position != "IR":
                 if player.points > top_player_points:
                     top_player_points = player.points
                     top_player = player
-                    
+
                     if top_player in box_score.home_lineup:
                         top_team = box_score.home_team.team_name
                     else:
                         top_team = box_score.away_team.team_name        
-    
+
     if top_team:
         return {
             'top_team': top_team,
@@ -331,7 +331,7 @@ def week8_weekly(league):
         }
     else:
         return None
-                
+
 
 # Returns team with the most offensive touchdowns scored with their starters for week 7
 def week7_weekly(league):
@@ -346,7 +346,7 @@ def week7_weekly(league):
     box_scores = league.box_scores(week=week_number)
     team_dict = {}
     for box_score in box_scores:
-        
+
         total_tds_home = 0
         total_tds_away = 0
 
@@ -476,11 +476,11 @@ def week4_weekly(league):
                         rushing_yards = player.stats[4]['breakdown'].get('rushingYards', 0)
                 else:
                     rushing_yards = 0  # Fallback if rushingYards doesn't exist
-                
+
                 if rushing_yards > most_rush_yards:
                     most_rush_yards = rushing_yards
                     top_rb = player
-                
+
                     if player in box_score.home_lineup:
                         top_player_team = box_score.home_team.team_name
                     else:
@@ -495,7 +495,7 @@ def week4_weekly(league):
         }
     else:
         return None
-            
+
 
 
 
@@ -593,7 +593,7 @@ def week2_weekly(league):
 # Returns team with starter who scored the most points for week 1
 def week1_weekly(league):
     week_number = 1
-    
+
     max_points = -1
     top_player = None
     top_player_team = None
@@ -633,6 +633,26 @@ def random_response():
         "No Fun League strikes again"
         ]
     return random.choice(random_responses)
+    
+def weeklylist():
+    formatted_response = (
+        f"Here are all the weeklies you can win\n\n"
+        f" - WEEK 1: Get Schwifty - Team with the single highest scoring starter (Fantasy Football Team - Josh Allen 38.76 points)\n\n"
+        f" - WEEK 2: Chicks Dig The Long Ball - Team with the starting QB with the longest pass\n\n"
+        f" - WEEK 3: Bench Warmer - Team with the most total points from their bench\n\n"
+        f" - WEEK 4: Run Forrest Run! - Team with the starting RB with the most rushing yards\n\n"
+        f" - WEEK 5: Dirty 30 - Team with any starter closest to 30 points (over OR under)\n\n"
+        f" - WEEK 6: Over Achiever - Team with most points over their weekly projection with their starters\n\n"
+        f" - WEEK 7: Touchdown Thurman Thomas - Team with the most offensive touchdowns scored with their starters\n\n"
+        f" - WEEK 8: Should Have Swiped Right - Team with the highest scorer on the bench\n\n"
+        f" - WEEK 9: Bulls-eye - Team closest to their projected point total (over OR under)\n\n"
+        f" - WEEK 10: Blownout.com/rekt - Team that wins with the biggest points margin of victory\n\n"
+        f" - WEEK 11: Best Loser - Team that loses with the highest score\n\n"
+        f" - WEEK 12: Gotta Catch Em All - Team with the starting WR with the most receptions\n\n"
+        f" - WEEK 13: Blackjack - Team with a starter closest to 21 points without going over\n\n"
+        f" - WEEK 14: Photo Finish - Team that beats its opponent by the smallest margin of victory\n\n"
+    )
+    return formatted_response
 
 def what_week():
     league = League(league_id=config.ESPN_LEAGUE_ID, year=config.ESPN_SEASON_YEAR)
@@ -654,7 +674,7 @@ def fetch_fantasy_data():
                     'data':player.stats
                 }
                 team_data.append(player_info)
-            
+
         return player_info
     except Exception as e:
         print(f"Error fetching fantasy data: {e}")
@@ -672,7 +692,7 @@ def webhook():
 
     # This is the message from the chat
     message = data['text'].lower()
-    
+
     if 'bad bot' in message:
         response_message = "Bruh I’m just trying to help!"
         send_message(response_message) 
@@ -720,7 +740,7 @@ def webhook():
 
         if weekly_week < current_week:
             fantasy_data = week1_weekly(league)
-            
+
             if fantasy_data:
                 player_name = fantasy_data.get('player_name')
                 player_points = fantasy_data.get('player_points')
@@ -754,7 +774,7 @@ def webhook():
 
         if weekly_week < current_week:
             fantasy_data = week3_weekly(league)
-            
+
             if fantasy_data:
                 team_name = fantasy_data.get('team_name')
                 total_points = fantasy_data.get('bench_points')
@@ -770,7 +790,7 @@ def webhook():
 
         if weekly_week < current_week:
             fantasy_data = week4_weekly(league)
-            
+
             if fantasy_data:
                 team_name = fantasy_data.get('team_name')
                 player_name = fantasy_data.get('player_name')
@@ -787,7 +807,7 @@ def webhook():
 
         if weekly_week < current_week:
             fantasy_data = week5_weekly(league)
-            
+
             if fantasy_data:
                 team_name = fantasy_data.get('team_name')
                 player_name = fantasy_data.get('player_name')
@@ -828,7 +848,7 @@ def webhook():
 
         if weekly_week < current_week:
             fantasy_data = week7_weekly(league)
-            
+
             if fantasy_data:
                 team_name = fantasy_data.get('team_name')
                 team_total_tds = fantasy_data.get('top_team_tds')
@@ -872,7 +892,7 @@ def webhook():
                 response_message = "Sorry, I couldn't fetch the fantasy data."
         else:
             response_message = "Week 9 is not over yet.\n\nUse command:\n!commmands to see what other commands you can use."
-        
+
     elif '!weekly10' == message:
         weekly_week = 10
         current_week = league.current_week
@@ -925,7 +945,7 @@ def webhook():
                     player_name = player.name
                     message_temp = f"{team_name} ({player_name}, {max_receptions} receptions)"
                     message.append(message_temp)
-                
+
                 response_message = f"Winner of Weekly 12: Gotta Catch Em All - Teams with the starting WRs with the most receptions: \n\n" + "\n".join(message)
             else:
                 response_message = "Sorry, I couldn't fetch the fantasy data."
@@ -988,9 +1008,11 @@ def webhook():
             response_message = formatted_response
         else:
             response_message = "Sorry, I couldn't fetch the fantasy data."
+    elif "!weeklylist" == message:
+        response_message = weeklylist()
     else:
         response_message = random_response()
-    
+
 
     send_message(response_message)
     return jsonify({"status": "OK", "response": response_message}), 200
@@ -1011,4 +1033,5 @@ if __name__ == '__main__':
     # scheduler_thread = threading.Thread(target=schedule_survival_bowl)
     # scheduler_thread.daemon = True  # Daemon thread will exit when the main program exits
     # scheduler_thread.start()
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
