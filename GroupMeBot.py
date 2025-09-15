@@ -691,7 +691,7 @@ def random_response():
 def weeklylist():
     formatted_response = (
         f"Here are all the weeklies you can win\n\n"
-        f" - WEEK 1: Get Schwifty - Team with the single highest scoring starter (Fantasy Football Team - Josh Allen 38.76 points)\n\n"
+        f" - WEEK 1: Get Schwifty - Team with the single highest scoring starter\n\n"
         f" - WEEK 2: Chicks Dig The Long Ball - Team with the starting QB with the longest pass\n\n"
         f" - WEEK 3: Bench Warmer - Team with the most total points from their bench\n\n"
         f" - WEEK 4: Run Forrest Run! - Team with the starting RB with the most rushing yards\n\n"
