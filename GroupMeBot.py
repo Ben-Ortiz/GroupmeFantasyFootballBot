@@ -371,20 +371,12 @@ def week7_weekly(league):
         total_tds_away = 0
 
         for player in box_score.home_lineup:
-            if (
-                player.slot_position != "D/ST"
-                and player.slot_position != "BE"
-                and player.slot_position != "IR"
-            ):
-                rush_tds = player.stats[week_number]["breakdown"].get(
-                    "rushingTouchdowns", 0
-                )
-                receiving_tds = player.stats[week_number]["breakdown"].get(
-                    "receivingTouchdowns", 0
-                )
-                passing_tds = player.stats[week_number]["breakdown"].get(
-                    "passingTouchdowns", 0
-                )
+            if player.slot_position not in ["D/ST", "BE", "IR"]:
+                player_week_stats = player.stats.get(week_number, {})
+                breakdown = player_week_stats.get("breakdown", {})
+                rush_tds = breakdown.get("rushingTouchdowns", 0)
+                receiving_tds = breakdown.get("receivingTouchdowns", 0)
+                passing_tds = breakdown.get("passingTouchdowns", 0)
 
                 total_tds_home += rush_tds + receiving_tds + passing_tds
 
@@ -393,20 +385,12 @@ def week7_weekly(league):
         team_dict[box_score.home_team] += total_tds_home
 
         for player in box_score.away_lineup:
-            if (
-                player.slot_position != "D/ST"
-                and player.slot_position != "BE"
-                and player.slot_position != "IR"
-            ):
-                rush_tds = player.stats[week_number]["breakdown"].get(
-                    "rushingTouchdowns", 0
-                )
-                receiving_tds = player.stats[week_number]["breakdown"].get(
-                    "receivingTouchdowns", 0
-                )
-                passing_tds = player.stats[week_number]["breakdown"].get(
-                    "passingTouchdowns", 0
-                )
+            if player.slot_position not in ["D/ST", "BE", "IR"]:
+                player_week_stats = player.stats.get(week_number, {})
+                breakdown = player_week_stats.get("breakdown", {})
+                rush_tds = breakdown.get("rushingTouchdowns", 0)
+                receiving_tds = breakdown.get("receivingTouchdowns", 0)
+                passing_tds = breakdown.get("passingTouchdowns", 0)
 
                 total_tds_away += rush_tds + receiving_tds + passing_tds
 
@@ -1092,4 +1076,4 @@ if __name__ == "__main__":
     # scheduler_thread.daemon = True  # Daemon thread will exit when the main program exits
     # scheduler_thread.start()
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=False)
+    app.run(host="0.0.0.0", port=port, debug=True)
